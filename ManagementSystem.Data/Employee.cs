@@ -18,7 +18,6 @@ namespace ManagementSystem.Data
         public Employee()
         {
             this.Complaints = new HashSet<Complaint>();
-            this.EmployeeStatus = new HashSet<EmployeeStatu>();
             this.Reviews = new HashSet<Review>();
             this.SickLeaves = new HashSet<SickLeave>();
             this.Vacations = new HashSet<Vacation>();
@@ -37,16 +36,16 @@ namespace ManagementSystem.Data
         public Nullable<int> Rating { get; set; }
         public Nullable<int> SickDaysTotal { get; set; }
         public int DepartmentId { get; set; }
+        public int EmployeeStatusId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Complaint> Complaints { get; set; }
         public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmployeeStatu> EmployeeStatus { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review> Reviews { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SickLeave> SickLeaves { get; set; }
+        public virtual EmployeeStatu EmployeeStatu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Vacation> Vacations { get; set; }
     }

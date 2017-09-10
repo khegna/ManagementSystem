@@ -14,13 +14,19 @@ namespace ManagementSystem.Data
     
     public partial class EmployeeStatu
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public EmployeeStatu()
+        {
+            this.Employees = new HashSet<Employee>();
+        }
+    
         public int EmployeeStatusId { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> TreminationDate { get; set; }
         public Nullable<System.DateTime> FinalDate { get; set; }
         public string CurrentStatus { get; set; }
-        public int EmployeeId { get; set; }
     
-        public virtual Employee Employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

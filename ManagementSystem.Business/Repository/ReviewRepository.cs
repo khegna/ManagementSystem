@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ManagementSystem.Business.Repository
 {
+
     class ReviewRepository
     {
     }

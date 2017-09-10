@@ -32,6 +32,7 @@ namespace ManagementSystem.Business.EmployeeRepository
             var employee = _dbContext.Employees.Where(x => x.EmployeeId == employeeId).FirstOrDefault();
             return employee;
         }
+
         public List<Employee> GetEmployeesByManagerId(int managerId)
         {
             var employeesByManager = _dbContext.Employees.Where(x => x.ManagerId == managerId).ToList();

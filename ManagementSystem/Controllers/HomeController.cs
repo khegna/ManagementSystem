@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManagementSystem.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,6 +25,11 @@ namespace ManagementSystem.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+        public ActionResult EmployeeSession() {
+            var employee = (Employee)Session["employee"];
+            ViewBag.employeeTitle = employee.JobTitle;
             return View();
         }
     }

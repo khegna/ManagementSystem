@@ -147,6 +147,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -213,6 +214,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ManagementSystem.Business\ManagementSystem.Business.csproj">
+      <Project>{c3d259c2-cbaf-4b5f-a677-fa0facbbf782}</Project>
+      <Name>ManagementSystem.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ManagementSystem.Data\ManagementSystem.Data.csproj">
       <Project>{88177677-c398-4f62-b6cc-aaf65306a83b}</Project>
       <Name>ManagementSystem.Data</Name>

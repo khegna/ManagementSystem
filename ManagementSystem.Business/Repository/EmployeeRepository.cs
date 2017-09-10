@@ -27,6 +27,16 @@ namespace ManagementSystem.Business.EmployeeRepository
             var employees = _dbContext.Employees.OrderBy(x => x.Rating).ToList();
             return employees;
         }
+
+
+        //
+        public Employee EmployeeLoggedIn(Employee employee)
+        {
+            var employeeLoggedIn = _dbContext.Employees.Where(x => x.Username == employee.Username && x.EmployeePassword == employee.EmployeePassword).FirstOrDefault();
+            return employeeLoggedIn;
+
+        }
+
         public Employee GetEmployeeById(int employeeId)
         {
             var employee = _dbContext.Employees.Where(x => x.EmployeeId == employeeId).FirstOrDefault();

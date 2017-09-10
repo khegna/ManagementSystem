@@ -15,9 +15,9 @@ namespace ManagementSystem.Business.Repository
             _dbContext = new ManagementSystemEntities();
         }
 
-        public List<Employee> GetEmployeesByStatus()
+        public List<Employee> GetEmployeesByStatus(string currentStatus)
         {
-            var employees = _dbContext.Employees.ToList();
+            var employees = _dbContext.Employees.Where(x => x.EmployeeStatu.CurrentStatus == currentStatus).ToList();
             return employees;
         }
     }

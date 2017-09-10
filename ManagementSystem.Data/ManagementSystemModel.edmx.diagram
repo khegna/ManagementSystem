@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="97ca0b27d7974bca9be571cf8f9a5a27" Name="Diagram1">
+        <EntityTypeShape EntityType="ManagementSystemModel.Complaint" Width="1.5" PointX="12" PointY="3.5" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Department" Width="1.5" PointX="2.5" PointY="0.5" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Employee" Width="1.5" PointX="7.5" PointY="0.5" />
+        <EntityTypeShape EntityType="ManagementSystemModel.EmployeeStatu" Width="1.5" PointX="9.75" PointY="1.75" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Review" Width="1.5" PointX="2.5" PointY="2.75" />
+        <EntityTypeShape EntityType="ManagementSystemModel.SickLeave" Width="1.5" PointX="12" PointY="0.5" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Vacation" Width="1.5" PointX="4.875" PointY="1.5" />
+        <AssociationConnector Association="ManagementSystemModel.FkEmployeeComplaintId" />
+        <AssociationConnector Association="ManagementSystemModel.FkDepartmentId" />
+        <AssociationConnector Association="ManagementSystemModel.FkEmployeeId" />
+        <AssociationConnector Association="ManagementSystemModel.FkEmployeeReviewId" />
+        <AssociationConnector Association="ManagementSystemModel.FkEmployeeSickLeaveId" />
+        <AssociationConnector Association="ManagementSystemModel.FkEmployeeVacationId" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

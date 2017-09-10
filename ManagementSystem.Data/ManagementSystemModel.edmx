@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Complaint">
+          <Key>
+            <PropertyRef Name="ComplaintId" />
+          </Key>
+          <Property Name="ComplaintId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComplaintDescription" Type="nvarchar" MaxLength="200" />
+          <Property Name="DateFiled" Type="date" />
+          <Property Name="SeverityLevel" Type="int" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Resolved" Type="bit" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="nvarchar" MaxLength="75" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="75" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="75" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeePassword" Type="nvarchar" MaxLength="400" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Salary" Type="int" />
+          <Property Name="VacationDays" Type="int" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="75" />
+          <Property Name="ManagerId" Type="int" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="SickDaysTotal" Type="int" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeStatus">
+          <Key>
+            <PropertyRef Name="EmployeeStatusId" />
+          </Key>
+          <Property Name="EmployeeStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="TreminationDate" Type="date" />
+          <Property Name="FinalDate" Type="date" />
+          <Property Name="CurrentStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateIssued" Type="date" />
+          <Property Name="ReviewDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="ReviewWeight" Type="int" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SickLeave">
+          <Key>
+            <PropertyRef Name="SickLeaveId" />
+          </Key>
+          <Property Name="SickLeaveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="75" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vacation">
+          <Key>
+            <PropertyRef Name="VacationId" />
+          </Key>
+          <Property Name="VacationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="AprovalStatus" Type="nvarchar" MaxLength="75" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FkDepartmentId">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FkEmployeeComplaintId">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Complaint" Type="Self.Complaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Complaint">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FkEmployeeId">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="EmployeeStatus" Type="Self.EmployeeStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeStatus">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FkEmployeeReviewId">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FkEmployeeSickLeaveId">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="SickLeave" Type="Self.SickLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="SickLeave">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FkEmployeeVacationId">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Vacation" Type="Self.Vacation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Vacation">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ManagementSystemModelStoreContainer">
+          <EntitySet Name="Complaint" EntityType="Self.Complaint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeStatus" EntityType="Self.EmployeeStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SickLeave" EntityType="Self.SickLeave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vacation" EntityType="Self.Vacation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FkDepartmentId" Association="Self.FkDepartmentId">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FkEmployeeComplaintId" Association="Self.FkEmployeeComplaintId">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Complaint" EntitySet="Complaint" />
+          </AssociationSet>
+          <AssociationSet Name="FkEmployeeId" Association="Self.FkEmployeeId">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeStatus" EntitySet="EmployeeStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FkEmployeeReviewId" Association="Self.FkEmployeeReviewId">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FkEmployeeSickLeaveId" Association="Self.FkEmployeeSickLeaveId">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="SickLeave" EntitySet="SickLeave" />
+          </AssociationSet>
+          <AssociationSet Name="FkEmployeeVacationId" Association="Self.FkEmployeeVacationId">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Vacation" EntitySet="Vacation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ManagementSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Complaints" EntityType="ManagementSystemModel.Complaint" />
+          <EntitySet Name="Departments" EntityType="ManagementSystemModel.Department" />
+          <EntitySet Name="Employees" EntityType="ManagementSystemModel.Employee" />
+          <EntitySet Name="EmployeeStatus" EntityType="ManagementSystemModel.EmployeeStatu" />
+          <EntitySet Name="Reviews" EntityType="ManagementSystemModel.Review" />
+          <EntitySet Name="SickLeaves" EntityType="ManagementSystemModel.SickLeave" />
+          <EntitySet Name="Vacations" EntityType="ManagementSystemModel.Vacation" />
+          <AssociationSet Name="FkEmployeeComplaintId" Association="ManagementSystemModel.FkEmployeeComplaintId">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Complaint" EntitySet="Complaints" />
+          </AssociationSet>
+          <AssociationSet Name="FkDepartmentId" Association="ManagementSystemModel.FkDepartmentId">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FkEmployeeId" Association="ManagementSystemModel.FkEmployeeId">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmployeeStatu" EntitySet="EmployeeStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FkEmployeeReviewId" Association="ManagementSystemModel.FkEmployeeReviewId">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FkEmployeeSickLeaveId" Association="ManagementSystemModel.FkEmployeeSickLeaveId">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="SickLeave" EntitySet="SickLeaves" />
+          </AssociationSet>
+          <AssociationSet Name="FkEmployeeVacationId" Association="ManagementSystemModel.FkEmployeeVacationId">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Vacation" EntitySet="Vacations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Complaint">
+          <Key>
+            <PropertyRef Name="ComplaintId" />
+          </Key>
+          <Property Name="ComplaintId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComplaintDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DateFiled" Type="DateTime" Precision="0" />
+          <Property Name="SeverityLevel" Type="Int32" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="Resolved" Type="Boolean" />
+          <NavigationProperty Name="Employee" Relationship="ManagementSystemModel.FkEmployeeComplaintId" FromRole="Complaint" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="ManagementSystemModel.FkDepartmentId" FromRole="Department" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeePassword" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Int32" />
+          <Property Name="VacationDays" Type="Int32" />
+          <Property Name="JobTitle" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerId" Type="Int32" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="SickDaysTotal" Type="Int32" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Complaints" Relationship="ManagementSystemModel.FkEmployeeComplaintId" FromRole="Employee" ToRole="Complaint" />
+          <NavigationProperty Name="Department" Relationship="ManagementSystemModel.FkDepartmentId" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="EmployeeStatus" Relationship="ManagementSystemModel.FkEmployeeId" FromRole="Employee" ToRole="EmployeeStatu" />
+          <NavigationProperty Name="Reviews" Relationship="ManagementSystemModel.FkEmployeeReviewId" FromRole="Employee" ToRole="Review" />
+          <NavigationProperty Name="SickLeaves" Relationship="ManagementSystemModel.FkEmployeeSickLeaveId" FromRole="Employee" ToRole="SickLeave" />
+          <NavigationProperty Name="Vacations" Relationship="ManagementSystemModel.FkEmployeeVacationId" FromRole="Employee" ToRole="Vacation" />
+        </EntityType>
+        <EntityType Name="EmployeeStatu">
+          <Key>
+            <PropertyRef Name="EmployeeStatusId" />
+          </Key>
+          <Property Name="EmployeeStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="TreminationDate" Type="DateTime" Precision="0" />
+          <Property Name="FinalDate" Type="DateTime" Precision="0" />
+          <Property Name="CurrentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="ManagementSystemModel.FkEmployeeId" FromRole="EmployeeStatu" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateIssued" Type="DateTime" Precision="0" />
+          <Property Name="ReviewDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ReviewWeight" Type="Int32" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="ManagementSystemModel.FkEmployeeReviewId" FromRole="Review" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="SickLeave">
+          <Key>
+            <PropertyRef Name="SickLeaveId" />
+          </Key>
+          <Property Name="SickLeaveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="ApprovalStatus" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="ManagementSystemModel.FkEmployeeSickLeaveId" FromRole="SickLeave" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Vacation">
+          <Key>
+            <PropertyRef Name="VacationId" />
+          </Key>
+          <Property Name="VacationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="AprovalStatus" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="ManagementSystemModel.FkEmployeeVacationId" FromRole="Vacation" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FkEmployeeComplaintId">
+          <End Type="ManagementSystemModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ManagementSystemModel.Complaint" Role="Complaint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Complaint">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FkDepartmentId">
+          <End Type="ManagementSystemModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="ManagementSystemModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FkEmployeeId">
+          <End Type="ManagementSystemModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ManagementSystemModel.EmployeeStatu" Role="EmployeeStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeStatu">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FkEmployeeReviewId">
+          <End Type="ManagementSystemModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ManagementSystemModel.Review" Role="Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FkEmployeeSickLeaveId">
+          <End Type="ManagementSystemModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ManagementSystemModel.SickLeave" Role="SickLeave" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="SickLeave">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FkEmployeeVacationId">
+          <End Type="ManagementSystemModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="ManagementSystemModel.Vacation" Role="Vacation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Vacation">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ManagementSystemModelStoreContainer" CdmEntityContainer="ManagementSystemEntities">
+          <EntitySetMapping Name="Complaints">
+            <EntityTypeMapping TypeName="ManagementSystemModel.Complaint">
+              <MappingFragment StoreEntitySet="Complaint">
+                <ScalarProperty Name="Resolved" ColumnName="Resolved" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="SeverityLevel" ColumnName="SeverityLevel" />
+                <ScalarProperty Name="DateFiled" ColumnName="DateFiled" />
+                <ScalarProperty Name="ComplaintDescription" ColumnName="ComplaintDescription" />
+                <ScalarProperty Name="ComplaintId" ColumnName="ComplaintId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="ManagementSystemModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="ManagementSystemModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="SickDaysTotal" ColumnName="SickDaysTotal" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="VacationDays" ColumnName="VacationDays" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmployeePassword" ColumnName="EmployeePassword" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeStatus">
+            <EntityTypeMapping TypeName="ManagementSystemModel.EmployeeStatu">
+              <MappingFragment StoreEntitySet="EmployeeStatus">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="FinalDate" ColumnName="FinalDate" />
+                <ScalarProperty Name="TreminationDate" ColumnName="TreminationDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EmployeeStatusId" ColumnName="EmployeeStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="ManagementSystemModel.Review">
+              <MappingFragment StoreEntitySet="Review">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ReviewWeight" ColumnName="ReviewWeight" />
+                <ScalarProperty Name="ReviewDescription" ColumnName="ReviewDescription" />
+                <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
+                <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SickLeaves">
+            <EntityTypeMapping TypeName="ManagementSystemModel.SickLeave">
+              <MappingFragment StoreEntitySet="SickLeave">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="SickLeaveId" ColumnName="SickLeaveId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vacations">
+            <EntityTypeMapping TypeName="ManagementSystemModel.Vacation">
+              <MappingFragment StoreEntitySet="Vacation">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="AprovalStatus" ColumnName="AprovalStatus" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="VacationId" ColumnName="VacationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

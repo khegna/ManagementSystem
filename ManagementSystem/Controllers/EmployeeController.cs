@@ -9,7 +9,7 @@ using ManagementSystem.Business.EmployeeRepository;
 
 namespace ManagementSystem.Controllers
 {
-    public class EmployeeController
+    public class EmployeeController : Controller
     {
         private EmployeeRepository _userRepository;
 
@@ -33,17 +33,15 @@ namespace ManagementSystem.Controllers
     [HttpPost]
     public ActionResult login(Employee employee)
     {
-            var employeeLoggedIn = EmployeeLoggedIn(employee);
-
-        var userLoggedIn = db.Users.FirstOrDefault(x => x.UserName == user.UserName && x.UserPassword == userPasswordEncrypted);
-        if (userLoggedIn != null)
+        var employeeLoggedIn = _userRepository.EmployeeLoggedIn(employee);
+        if (employeeLoggedIn != null)
         {
             ViewBag.message = "loggedin";
             ViewBag.triedOnce = "yes";
 
-            // Session["username"] = user.UserName;
-            Session["user"] = userLoggedIn;
-            return RedirectToAction("Welcomepage", "User", new { username = userLoggedIn?.UserName });
+            
+            //Session["user"] = userLoggedIn;
+            return RedirectToAction("Welcomepage", "User", new { username = employeeLoggedIn?.Username });
         }
         else
         {

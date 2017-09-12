@@ -40,3 +40,4 @@ namespace ManagementSystem.Business.Repository
             return sickLeaveByStatus;
         }
     }
+}

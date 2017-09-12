@@ -21,9 +21,10 @@ namespace ManagementSystem.Controllers
     public ActionResult login()
     {
         var employeeSession = (Employee)Session["employee"];
-        if (employeeSession != null)
+
+            if (employeeSession != null)
         {
-            return RedirectToAction("Welcomepage", "User", new { user = Session["user"] });
+            return RedirectToAction("WelcomePage", "Employee", new { employee = Session["employee"] });
         }
         else
         {
@@ -38,10 +39,14 @@ namespace ManagementSystem.Controllers
         {
             ViewBag.message = "loggedin";
             ViewBag.triedOnce = "yes";
+      
 
-            
-            //Session["user"] = userLoggedIn;
-            return RedirectToAction("Welcomepage", "User", new { username = employeeLoggedIn?.Username });
+                Session["employee"] = employeeLoggedIn;
+
+                var employeeS = (Employee)Session["employee"];
+                ViewBag.employeeTitle = employeeS.JobTitle;
+
+                return RedirectToAction("WelcomePage","Employee", new { username = employeeLoggedIn?.Username });
         }
         else
         {
@@ -49,8 +54,17 @@ namespace ManagementSystem.Controllers
             return View();
         }
     }
+        public ActionResult WelcomePage(Employee employee)
+        {
+            var employeeS = (Employee)Session["employee"];
+            ViewBag.employeeTitle = employeeS.JobTitle;
+            return View(employee);
+        }
+        public ActionResult MyProfile() {
+            var employee = (Employee)Session["employee"];
+            return View(employee);
+        }
 
 
-
-}
+    }
 }

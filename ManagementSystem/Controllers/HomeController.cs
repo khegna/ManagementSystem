@@ -11,11 +11,13 @@ namespace ManagementSystem.Controllers
     {
         public ActionResult Index()
         {
+ 
             return View();
         }
 
         public ActionResult About()
         {
+    
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -23,14 +25,11 @@ namespace ManagementSystem.Controllers
 
         public ActionResult Contact()
         {
+
             ViewBag.Message = "Your contact page.";
 
             return View();
         }
-        public ActionResult EmployeeSession() {
-            var employee = (Employee)Session["employee"];
-            ViewBag.employeeTitle = employee.JobTitle;
-            return View();
-        }
+
     }
 }

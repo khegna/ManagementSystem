@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Web;
+@using System.Web.Mvc;
+@using ManagementSystem.Business.Repository;
+@using ManagementSystem.Data;
+@using ManagementSystem.Business.EmployeeRepository;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -16,20 +24,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Management System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-
-            @if (ViewBag.employeeTitle == "Manager")
+           
+            @if (((Employee)Session["employee"])!=null && ((Employee)Session["employee"]).JobTitle == "Manager")
             {
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Employees", "Index", "Manager")</li>
+                    
                     <li>@Html.ActionLink("Profile", "MyProfile", "Employee")</li>
                 </ul>
             </div>
             }
-            @if (ViewBag.employeeTitle == "Human Resources")
+            @if (((Employee)Session["employee"]) != null && ((Employee)Session["employee"]).JobTitle == "Human Resources")
             {
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -39,17 +48,17 @@
                     </ul>
                 </div>
             }
-            @if (ViewBag.employeeTitle == "Employee")
+            @if (((Employee)Session["employee"]) != null && ((Employee)Session["employee"]).JobTitle == "Employee")
             {
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Profile", "MyProfile", "Employee")</li>
                     </ul>
                 </div>
             }
-            @if (ViewBag.employeeTitle == null)
+            @if (((Employee)Session["employee"]) == null)
             {
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">

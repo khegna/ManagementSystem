@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ManagementSystem.Data.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div style="font-family:Arial">
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <p>
+        @using (Html.BeginForm("Index","Manager",FormMethod.Get)) {
+        <b>Seach By</b> @Html.RadioButton("searchBy", "Name",true) <text>Lastname</text>
+        @Html.RadioButton("searchBy", "Username") <text>Username</text>
+        @Html.RadioButton("searchBy", "Sickdays") <text>Sickdays</text>
+        @Html.RadioButton("searchBy", "DepartmentId") <text>DepartmentId</text>
+        @Html.RadioButton("searchBy", "JobTitle") <text>Job Title</text><br/>
+        @Html.TextBox("search")<input type="submit" value="Search"/>
+        }
+    </p>
+    <table class="table" border="1">
+        <tr>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Salary
+            </th>
+            <th>
+                Vacation Days
+            </th>
+            <th>
+                Job Title
+            </th>
+            <th>
+                Rating
+            </th>
+            <th>
+                Sick Days Total
+            </th>
+            <th>
+                Department Name
+            </th>
+            <th>
+                Current Status
+            </th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VacationDays)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SickDaysTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeStatu.CurrentStatus)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.EmployeeId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

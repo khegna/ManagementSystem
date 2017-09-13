@@ -22,16 +22,10 @@ namespace ManagementSystem.Business.EmployeeRepository
             var employees = _dbContext.Employees.ToList();
             return employees;
         }
-        //public List<Employee> GetEmployeesBySearchTerm(String searchTerm)
-       // {
-        //    var employees = _dbContext.Employees
-        //            .OrderByDescending(x=> x.Rating)
-        //            .Select(x=>)
-        //    return employees;
-       // }
+
         public List<Employee> GetEmployeeOrderedByRating()
         {
-            var employees = _dbContext.Employees.OrderBy(x => x.Rating).ToList();
+            var employees = _dbContext.Employees.OrderByDescending(x => x.Rating).ToList();
             return employees;
         }
 

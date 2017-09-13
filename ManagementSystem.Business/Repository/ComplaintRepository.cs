@@ -14,6 +14,11 @@ namespace ManagementSystem.Business.Repository
         {
             _dbContext = new ManagementSystemEntities();
         }
+        public void CreateComplaint(Complaint complaint)
+        {
+            _dbContext.Complaints.Add(complaint);
+            _dbContext.SaveChanges();
+        }
         public List<Complaint> GetComplaints()
         {
             var complaints = _dbContext.Complaints.ToList();

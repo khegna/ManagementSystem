@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ManagementSystem.Data.Complaint>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ComplaintDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateFiled)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SeverityLevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resolved)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.FirstName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ComplaintDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateFiled)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SeverityLevel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Resolved)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.FirstName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ComplaintId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ComplaintId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ComplaintId })
+        </td>
+    </tr>
+}
+
+</table>

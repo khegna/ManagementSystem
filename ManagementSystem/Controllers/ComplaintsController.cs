@@ -52,6 +52,7 @@ namespace ManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                complaint.EmployeeId = ((Employee)Session["employee"]).EmployeeId;
                 db.Complaints.Add(complaint);
                 db.SaveChanges();
                 return RedirectToAction("Index");

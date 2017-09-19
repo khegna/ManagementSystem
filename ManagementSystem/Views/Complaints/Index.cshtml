@@ -18,13 +18,11 @@
             @Html.DisplayNameFor(model => model.DateFiled)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SeverityLevel)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Resolved)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Employee.FirstName)
+            Name
+           @* @Html.DisplayNameFor(model => model.Employee.FirstName)*@
         </th>
         <th></th>
     </tr>
@@ -38,18 +36,16 @@
             @Html.DisplayFor(modelItem => item.DateFiled)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SeverityLevel)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Resolved)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Employee.FirstName)
+            @Html.DisplayFor(modelItem => item.Employee.LastName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ComplaintId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ComplaintId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ComplaintId })
+            @Html.ActionLink("Details", "Details", new { id=item.ComplaintId }) 
+           @* @Html.ActionLink("Delete", "Delete", new { id=item.ComplaintId })*@
         </td>
     </tr>
 }

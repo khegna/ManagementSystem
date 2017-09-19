@@ -11,7 +11,7 @@
           </Key>
           <Property Name="ComplaintId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ComplaintDescription" Type="nvarchar" MaxLength="200" />
-          <Property Name="DateFiled" Type="date" />
+          <Property Name="DateFiled" Type="datetime" />
           <Property Name="SeverityLevel" Type="int" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="Resolved" Type="bit" />
@@ -230,7 +230,7 @@
           </Key>
           <Property Name="ComplaintId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ComplaintDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="DateFiled" Type="DateTime" Precision="0" />
+          <Property Name="DateFiled" Type="DateTime" Precision="3" />
           <Property Name="SeverityLevel" Type="Int32" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <Property Name="Resolved" Type="Boolean" />

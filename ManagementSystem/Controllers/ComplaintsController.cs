@@ -14,7 +14,7 @@ namespace ManagementSystem.Controllers
     {
         private ManagementSystemEntities db = new ManagementSystemEntities();
 
-        // GET: Complaint
+        // GET: Complaints
         public ActionResult Index()
         {
             var complaints = db.Complaints.Include(c => c.Employee);

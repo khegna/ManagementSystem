@@ -149,8 +149,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ComplaintsController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\EmployeeStatusController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\ReviewsController.cs" />
+    <Compile Include="Controllers\SickLeavesController.cs" />
+    <Compile Include="Controllers\VacationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,6 +213,27 @@
     <Content Include="Views\Complaints\Details.cshtml" />
     <Content Include="Views\Complaints\Edit.cshtml" />
     <Content Include="Views\Complaints\Index.cshtml" />
+    <Content Include="Views\Reviews\Create.cshtml" />
+    <Content Include="Views\Reviews\Delete.cshtml" />
+    <Content Include="Views\Reviews\Details.cshtml" />
+    <Content Include="Views\Reviews\Edit.cshtml" />
+    <Content Include="Views\Reviews\Index.cshtml" />
+    <Content Include="Views\SickLeaves\Create.cshtml" />
+    <Content Include="Views\SickLeaves\Delete.cshtml" />
+    <Content Include="Views\SickLeaves\Details.cshtml" />
+    <Content Include="Views\SickLeaves\Edit.cshtml" />
+    <Content Include="Views\SickLeaves\Index.cshtml" />
+    <Content Include="Views\SickLeaves\SickLeave.cshtml" />
+    <Content Include="Views\Vacations\Create.cshtml" />
+    <Content Include="Views\Vacations\Delete.cshtml" />
+    <Content Include="Views\Vacations\Details.cshtml" />
+    <Content Include="Views\Vacations\Edit.cshtml" />
+    <Content Include="Views\Vacations\Index.cshtml" />
+    <Content Include="Views\EmployeeStatus\Create.cshtml" />
+    <Content Include="Views\EmployeeStatus\Delete.cshtml" />
+    <Content Include="Views\EmployeeStatus\Details.cshtml" />
+    <Content Include="Views\EmployeeStatus\Edit.cshtml" />
+    <Content Include="Views\EmployeeStatus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

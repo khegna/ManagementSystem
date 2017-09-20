@@ -40,18 +40,27 @@ namespace ManagementSystem.Controllers
         public ActionResult Create()
         {
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName");
+            var session = (Employee)Session["employee"];
+            if (session.JobTitle == "Manager")
+            {
+                var employeeByManager = (db.Employees.Where(x => x.ManagerId == session.EmployeeId).ToList());
+
+                ViewBag.EmployeeId = new SelectList(employeeByManager, "EmployeeId", "FirstName");
+            }
+           
             return View();
         }
 
-        // POST: Reviews/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ReviewId,DateIssued,ReviewDescription,ReviewWeight,EmployeeId")] Review review)
         {
             if (ModelState.IsValid)
             {
+                var employeeId = review.EmployeeId;
+                var employee = db.Employees.Where(x => x.EmployeeId == employeeId).FirstOrDefault();
+                employee.Rating = employee.Rating + review.ReviewWeight;
                 db.Reviews.Add(review);
                 db.SaveChanges();
                 return RedirectToAction("Index");

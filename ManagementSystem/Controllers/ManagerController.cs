@@ -24,24 +24,56 @@ namespace ManagementSystem.Controllers
         // GET: Manager
         public ActionResult Index(string searchBy, string search)
         {
-            if (searchBy == "Name") {
-                return View(db.Employees.Where(x => x.LastName.StartsWith(search)).ToList());
-            }
-            if (searchBy == "Username")
+            var session = (Employee)Session["employee"];
+            if (session.JobTitle == "Manager")
             {
-                return View(db.Employees.Where(x => x.Username.StartsWith(search)).ToList());
+                var employeeByManager = (db.Employees.Where(x => x.ManagerId == session.EmployeeId).ToList());
+                if (searchBy == "Name")
+                {
+                    return View(employeeByManager.Where(x => x.LastName.StartsWith(search)).ToList());
+                }
+                if (searchBy == "Username")
+                {
+                    return View(employeeByManager.Where(x => x.Username.StartsWith(search)).ToList());
+                }
+                if (searchBy == "Sickdays")
+                {
+                    return View(employeeByManager.Where(x => (x.SickDaysTotal).ToString() == search).ToList());
+                }
+                if (searchBy == "DepartmentId")
+                {
+                    return View(employeeByManager.Where(x => (x.DepartmentId).ToString() == search).ToList());
+                }
+                if (searchBy == "JobTitle")
+                {
+                    return View(employeeByManager.Where(x => x.JobTitle.StartsWith(search)).ToList());
+                }
+                
+                var employees = employeeByManager.OrderByDescending(x => x.Rating).ToList();
+                return View(employees.ToList());
             }
-            if (searchBy == "Sickdays")
+            if (((Employee)Session["employee"]).JobTitle == "Human Resources")
             {
-                return View(db.Employees.Where(x => (x.SickDaysTotal).ToString() == search).ToList());
-            }
-            if (searchBy == "DepartmentId")
-            {
-                return View(db.Employees.Where(x => (x.DepartmentId).ToString() == search).ToList());
-            }
-            if (searchBy == "JobTitle")
-            {
-                return View(db.Employees.Where(x => x.JobTitle.StartsWith(search)).ToList());
+                if (searchBy == "Name")
+                {
+                    return View(db.Employees.Where(x => x.LastName.StartsWith(search)).ToList());
+                }
+                if (searchBy == "Username")
+                {
+                    return View(db.Employees.Where(x => x.Username.StartsWith(search)).ToList());
+                }
+                if (searchBy == "Sickdays")
+                {
+                    return View(db.Employees.Where(x => (x.SickDaysTotal).ToString() == search).ToList());
+                }
+                if (searchBy == "DepartmentId")
+                {
+                    return View(db.Employees.Where(x => (x.DepartmentId).ToString() == search).ToList());
+                }
+                if (searchBy == "JobTitle")
+                {
+                    return View(db.Employees.Where(x => x.JobTitle.StartsWith(search)).ToList());
+                }
             }
 
             var employee = _userRepository.GetEmployeeOrderedByRating();

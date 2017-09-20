@@ -30,8 +30,13 @@ namespace ManagementSystem.Controllers
         {
             return View();
         }
-    }
-    [HttpPost]
+    } 
+        public ActionResult logout()
+        {
+            Session["employee"] = null;
+            return View(new { employee = Session["employee"] });
+        }
+        [HttpPost]
     public ActionResult login(Employee employee)
     {
         var employeeLoggedIn = _userRepository.EmployeeLoggedIn(employee);

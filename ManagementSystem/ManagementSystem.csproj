@@ -234,6 +234,7 @@
     <Content Include="Views\EmployeeStatus\Details.cshtml" />
     <Content Include="Views\EmployeeStatus\Edit.cshtml" />
     <Content Include="Views\EmployeeStatus\Index.cshtml" />
+    <Content Include="Views\Employee\logout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

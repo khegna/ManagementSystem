@@ -41,6 +41,8 @@
           <Property Name="SickDaysTotal" Type="int" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
           <Property Name="EmployeeStatusId" Type="int" Nullable="false" />
+          <Property Name="NumberOfReviews" Type="int" />
+          <Property Name="Standing" Type="int" />
         </EntityType>
         <EntityType Name="EmployeeStatus">
           <Key>
@@ -262,6 +264,8 @@
           <Property Name="SickDaysTotal" Type="Int32" />
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
           <Property Name="EmployeeStatusId" Type="Int32" Nullable="false" />
+          <Property Name="NumberOfReviews" Type="Int32" />
+          <Property Name="Standing" Type="Int32" />
           <NavigationProperty Name="Complaints" Relationship="ManagementSystemModel.FkEmployeeComplaintId" FromRole="Employee" ToRole="Complaint" />
           <NavigationProperty Name="Department" Relationship="ManagementSystemModel.FkDepartmentId" FromRole="Employee" ToRole="Department" />
           <NavigationProperty Name="Reviews" Relationship="ManagementSystemModel.FkEmployeeReviewId" FromRole="Employee" ToRole="Review" />
@@ -414,6 +418,8 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="ManagementSystemModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Standing" ColumnName="Standing" />
+                <ScalarProperty Name="NumberOfReviews" ColumnName="NumberOfReviews" />
                 <ScalarProperty Name="EmployeeStatusId" ColumnName="EmployeeStatusId" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="SickDaysTotal" ColumnName="SickDaysTotal" />

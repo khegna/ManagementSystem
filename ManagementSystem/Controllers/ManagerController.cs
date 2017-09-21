@@ -49,7 +49,7 @@ namespace ManagementSystem.Controllers
                     return View(employeeByManager.Where(x => x.JobTitle.StartsWith(search)).ToList());
                 }
                 
-                var employees = employeeByManager.OrderByDescending(x => x.Rating).ToList();
+                var employees = employeeByManager.OrderByDescending(x => x.Standing).ToList();
                 return View(employees.ToList());
             }
             if (((Employee)Session["employee"]).JobTitle == "Human Resources")
@@ -76,7 +76,7 @@ namespace ManagementSystem.Controllers
                 }
             }
 
-            var employee = _userRepository.GetEmployeeOrderedByRating();
+            var employee = db.Employees.OrderByDescending(x => x.Standing).ToList();
             return View(employee.ToList());
 
         }

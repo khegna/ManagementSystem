@@ -60,7 +60,11 @@ namespace ManagementSystem.Controllers
             {
                 var employeeId = review.EmployeeId;
                 var employee = db.Employees.Where(x => x.EmployeeId == employeeId).FirstOrDefault();
+                employee.NumberOfReviews = employee.NumberOfReviews + 1;
                 employee.Rating = employee.Rating + review.ReviewWeight;
+                if (employee.NumberOfReviews != null) {
+                    employee.Standing = (employee.Rating / employee.NumberOfReviews);
+                }
                 db.Reviews.Add(review);
                 db.SaveChanges();
                 return RedirectToAction("Index");

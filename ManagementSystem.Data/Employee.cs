@@ -37,6 +37,8 @@ namespace ManagementSystem.Data
         public Nullable<int> SickDaysTotal { get; set; }
         public int DepartmentId { get; set; }
         public int EmployeeStatusId { get; set; }
+        public Nullable<int> NumberOfReviews { get; set; }
+        public Nullable<int> Standing { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Complaint> Complaints { get; set; }

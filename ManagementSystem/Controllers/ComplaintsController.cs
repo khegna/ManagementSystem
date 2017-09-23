@@ -17,6 +17,20 @@ namespace ManagementSystem.Controllers
         // GET: Complaints
         public ActionResult Index()
         {
+            var session = (Employee)Session["employee"];
+            ViewBag.sessionID = session;
+            if (session.JobTitle == "Manager")
+            {
+                var complaintByManager = (db.Complaints.Where(x => x.EmployeeId == session.EmployeeId).ToList());
+                var complaintsByView = (complaintByManager.Where(x => x.SendTo == "Manager").ToList());
+                return View(complaintsByView);
+
+            }
+            if (session.JobTitle == "Employee") {
+                var complaintByEmployee = (db.Complaints.Where(x => x.EmployeeId == session.EmployeeId).ToList());
+                return View(complaintByEmployee);
+            }
+
             var complaints = db.Complaints.Include(c => c.Employee);
             return View(complaints.ToList());
         }
@@ -32,6 +46,19 @@ namespace ManagementSystem.Controllers
             if (complaint == null)
             {
                 return HttpNotFound();
+            }
+            var session = (Employee)Session["employee"];
+            if (session.JobTitle == "Manager")
+            {
+                complaint.ViewedByManager = true;
+                db.Entry(complaint).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            if (session.JobTitle == "Human Resources")
+            {
+                complaint.ViewedByHR = true;
+                db.Entry(complaint).State = EntityState.Modified;
+                db.SaveChanges();
             }
             return View(complaint);
         }
@@ -54,6 +81,9 @@ namespace ManagementSystem.Controllers
             {
                 complaint.EmployeeId = ((Employee)Session["employee"]).EmployeeId;
                 complaint.Resolved = false;
+                complaint.SendTo = "Human Resources";
+                complaint.ViewedByHR = false;
+                complaint.ViewedByManager = false;
                 complaint.DateFiled = System.DateTime.Now;
                 db.Complaints.Add(complaint);
                 db.SaveChanges();
@@ -118,7 +148,8 @@ namespace ManagementSystem.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Complaint complaint = db.Complaints.Find(id);
-            db.Complaints.Remove(complaint);
+            complaint.SendTo = "Manager";
+            db.Entry(complaint).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

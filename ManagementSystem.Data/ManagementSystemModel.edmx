@@ -15,6 +15,10 @@
           <Property Name="SeverityLevel" Type="int" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="Resolved" Type="bit" />
+          <Property Name="SendTo" Type="nvarchar" MaxLength="75" />
+          <Property Name="ViewedByHR" Type="bit" />
+          <Property Name="ViewedByManager" Type="bit" />
+          <Property Name="Issue" Type="nvarchar" MaxLength="75" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -236,6 +240,10 @@
           <Property Name="SeverityLevel" Type="Int32" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <Property Name="Resolved" Type="Boolean" />
+          <Property Name="SendTo" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="ViewedByHR" Type="Boolean" />
+          <Property Name="ViewedByManager" Type="Boolean" />
+          <Property Name="Issue" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Employee" Relationship="ManagementSystemModel.FkEmployeeComplaintId" FromRole="Complaint" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Department">
@@ -398,6 +406,10 @@
           <EntitySetMapping Name="Complaints">
             <EntityTypeMapping TypeName="ManagementSystemModel.Complaint">
               <MappingFragment StoreEntitySet="Complaint">
+                <ScalarProperty Name="Issue" ColumnName="Issue" />
+                <ScalarProperty Name="ViewedByManager" ColumnName="ViewedByManager" />
+                <ScalarProperty Name="ViewedByHR" ColumnName="ViewedByHR" />
+                <ScalarProperty Name="SendTo" ColumnName="SendTo" />
                 <ScalarProperty Name="Resolved" ColumnName="Resolved" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="SeverityLevel" ColumnName="SeverityLevel" />

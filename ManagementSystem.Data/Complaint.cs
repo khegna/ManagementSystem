@@ -20,6 +20,10 @@ namespace ManagementSystem.Data
         public Nullable<int> SeverityLevel { get; set; }
         public int EmployeeId { get; set; }
         public Nullable<bool> Resolved { get; set; }
+        public string SendTo { get; set; }
+        public Nullable<bool> ViewedByHR { get; set; }
+        public Nullable<bool> ViewedByManager { get; set; }
+        public string Issue { get; set; }
     
         public virtual Employee Employee { get; set; }
     }

@@ -1,21 +1,26 @@
 ﻿@model ManagementSystem.Data.SickLeave
 
+
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>SickLeave</h4>
+        <h3>Sick leave request for: <b> @ViewBag.Employees.FirstName @ViewBag.Employees.LastName</b></h3>
+        <h4>Employee currently has <b> @ViewBag.Employees.SickDaysTotal </b>sick days left for this period</h4>
+        <h4>Employee will have <b> @(ViewBag.Employees.SickDaysTotal - Model.Duration ) </b> sick days left after approval</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.SickLeaveId)
 
+       
+@*
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -32,28 +37,38 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ApprovalStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ApprovalStatus, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ApprovalStatus, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EmployeeId, "EmployeeId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("EmployeeId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ApprovalStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ApprovalStatus, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ApprovalStatus, "", new { @class = "text-danger" })
         </div>
     </div>
+*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApprovalStatus, "Approval Status" , htmlAttributes: new { @class = "control-label col-md-2" })
+            <select class="form-control" id="ApprovalStatus" name="ApprovalStatus">
+                <option>Approval Status</option>
+                <option>Approved</option>
+                <option>Denied</option>
+                <option>Request Pending</option>
+            </select>
+        </div>
+        @*
+    <div class="form-group">
+        @Html.LabelFor(model => model.EmployeeId, "EmployeeId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("EmployeeId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+        *@
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
 }
 
 <div>

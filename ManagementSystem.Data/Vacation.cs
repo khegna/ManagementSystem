@@ -19,6 +19,7 @@ namespace ManagementSystem.Data
         public Nullable<int> Duration { get; set; }
         public string AprovalStatus { get; set; }
         public int EmployeeId { get; set; }
+        public string SendTo { get; set; }
     
         public virtual Employee Employee { get; set; }
     }

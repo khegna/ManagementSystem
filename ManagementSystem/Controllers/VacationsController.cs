@@ -15,10 +15,54 @@ namespace ManagementSystem.Controllers
         private ManagementSystemEntities db = new ManagementSystemEntities();
 
         // GET: Vacations
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search)
         {
-            var vacations = db.Vacations.Include(v => v.Employee);
-            return View(vacations.ToList());
+
+            var session = (Employee)Session["employee"];
+            ViewBag.SessionTitle = session.JobTitle;
+            if (session.JobTitle == "Manager")
+            {
+                var vacationByManager = (db.Vacations.Where(x => x.Employee.ManagerId == session.EmployeeId).ToList());
+                if (searchBy == "Approval Status")
+                {
+                    return View(vacationByManager.Where(x => x.AprovalStatus.StartsWith(search)).ToList());
+                }
+                if (searchBy == "Last name")
+                {
+                    return View(vacationByManager.Where(x => x.Employee.LastName.StartsWith(search)).ToList());
+                }
+                if (searchBy == "Duration")
+                {
+                    return View(vacationByManager.Where(x => x.Duration.ToString() == search).ToList());
+                }
+                var sickLeaveList = vacationByManager.OrderBy(x => x.StartDate).ToList();
+                return View(sickLeaveList.ToList());
+            }
+
+            if (session.JobTitle == "Human Resources")
+            {
+                var vacation = db.Vacations.Include(s => s.Employee);
+                if (searchBy == "Approval Status")
+                {
+                    return View(vacation.Where(x => x.AprovalStatus.StartsWith(search)).ToList());
+                }
+                if (searchBy == "Last name")
+                {
+                    return View(vacation.Where(x => x.Employee.LastName.StartsWith(search)).ToList());
+                }
+                if (searchBy == "Duration")
+                {
+                    return View(vacation.Where(x => x.Duration.ToString() == search).ToList());
+                }
+                if (searchBy == "Need HR Approval")
+                {
+                    return View(vacation.Where(x => x.AprovalStatus.ToString() == "Pending HR approval").ToList());
+                }
+               
+
+                return View(vacation.ToList());
+            }
+            return View();
         }
 
         // GET: Vacations/Details/5
@@ -52,6 +96,8 @@ namespace ManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                vacation.EmployeeId = ((Employee)Session["employee"]).EmployeeId;
+                vacation.AprovalStatus = "Request Pending";
                 db.Vacations.Add(vacation);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -74,6 +120,10 @@ namespace ManagementSystem.Controllers
                 return HttpNotFound();
             }
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName", vacation.EmployeeId);
+
+            ViewBag.Employees = db.Employees.Where(x => x.EmployeeId == vacation.EmployeeId).FirstOrDefault();
+         
+
             return View(vacation);
         }
 
@@ -86,6 +136,14 @@ namespace ManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (vacation.AprovalStatus == "Approved")
+                {
+                    var employee = db.Employees.Where(x => x.EmployeeId == vacation.EmployeeId).FirstOrDefault();
+                    employee.VacationDays = employee.VacationDays - vacation.Duration;
+                    db.Entry(employee).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 db.Entry(vacation).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -114,10 +172,14 @@ namespace ManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
             Vacation vacation = db.Vacations.Find(id);
-            db.Vacations.Remove(vacation);
+            vacation.SendTo = "Human Resourses";
+            vacation.AprovalStatus = "Pending HR approval";
+            db.Entry(vacation).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)

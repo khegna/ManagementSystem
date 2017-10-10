@@ -15,10 +15,55 @@ namespace ManagementSystem.Controllers
         private ManagementSystemEntities db = new ManagementSystemEntities();
 
         // GET: SickLeaves
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search)
         {
-            var sickLeaves = db.SickLeaves.Include(s => s.Employee);
-            return View(sickLeaves.ToList());
+
+            var session = (Employee)Session["employee"];
+            ViewBag.SessionTitle = session.JobTitle;
+            if (session.JobTitle == "Manager")
+            {
+                var sickLeaveByManager = (db.SickLeaves.Where(x => x.Employee.ManagerId == session.EmployeeId).ToList());
+                if (searchBy == "Approval Status")
+                {
+                    return View(sickLeaveByManager.Where(x => x.ApprovalStatus.StartsWith(search)).ToList());
+                }
+                if (searchBy == "Last name")
+                {
+                    return View(sickLeaveByManager.Where(x => x.Employee.LastName.StartsWith(search)).ToList());
+                }
+                if (searchBy == "Duration")
+                {
+                    return View(sickLeaveByManager.Where(x => x.Duration.ToString() == search).ToList());
+                }
+                var sickLeaveList = sickLeaveByManager.OrderBy(x => x.StartDate).ToList();
+                return View(sickLeaveList.ToList());
+            }
+
+            if (session.JobTitle == "Human Resources")
+            {
+                var sickLeaves = db.SickLeaves.Include(s => s.Employee);
+                if (searchBy == "Approval Status")
+                {
+                    return View(sickLeaves.Where(x => x.ApprovalStatus.StartsWith(search)).ToList());
+                }
+                if (searchBy == "Last name")
+                {
+                    return View(sickLeaves.Where(x => x.Employee.LastName.StartsWith(search)).ToList());
+                }
+                if (searchBy == "Duration")
+                {
+                    return View(sickLeaves.Where(x => x.Duration.ToString() == search).ToList());
+                }
+                if (searchBy == "Need HR Approval")
+                {
+                    return View(sickLeaves.Where(x => x.ApprovalStatus.ToString() == "Pending HR approval").ToList());
+                }
+                var sickLeaveList = db.SickLeaves.Include(r => r.Employee);
+               
+                return View(sickLeaveList.ToList());
+            }
+           
+            return View();
         }
 
         // GET: SickLeaves/Details/5
@@ -52,6 +97,8 @@ namespace ManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                sickLeave.EmployeeId = ((Employee)Session["employee"]).EmployeeId;
+                sickLeave.ApprovalStatus = "Request Pending";
                 db.SickLeaves.Add(sickLeave);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -73,6 +120,7 @@ namespace ManagementSystem.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Employees = db.Employees.Where(x => x.EmployeeId == sickLeave.EmployeeId).FirstOrDefault();
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName", sickLeave.EmployeeId);
             return View(sickLeave);
         }
@@ -86,11 +134,20 @@ namespace ManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (sickLeave.ApprovalStatus == "Approved")
+                {
+                    var employee = db.Employees.Where(x => x.EmployeeId == sickLeave.EmployeeId).FirstOrDefault();
+                    employee.SickDaysTotal = employee.SickDaysTotal - sickLeave.Duration;
+                    db.Entry(employee).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                
                 db.Entry(sickLeave).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName", sickLeave.EmployeeId);
+
             return View(sickLeave);
         }
 
@@ -115,7 +172,9 @@ namespace ManagementSystem.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             SickLeave sickLeave = db.SickLeaves.Find(id);
-            db.SickLeaves.Remove(sickLeave);
+            sickLeave.SendTo= "Human Resourses";
+            sickLeave.ApprovalStatus = "Pending HR approval";
+            db.Entry(sickLeave).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

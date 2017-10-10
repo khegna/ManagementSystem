@@ -41,7 +41,7 @@ namespace ManagementSystem.Controllers
         {
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName");
             var session = (Employee)Session["employee"];
-            if (session.JobTitle == "Manager")
+            if (session.JobTitle != null && session.JobTitle == "Manager")
             {
                 var employeeByManager = (db.Employees.Where(x => x.ManagerId == session.EmployeeId).ToList());
 
@@ -61,10 +61,13 @@ namespace ManagementSystem.Controllers
                 var employeeId = review.EmployeeId;
                 var employee = db.Employees.Where(x => x.EmployeeId == employeeId).FirstOrDefault();
                 employee.NumberOfReviews = employee.NumberOfReviews + 1;
+                review.DateIssued = System.DateTime.Now;
                 employee.Rating = employee.Rating + review.ReviewWeight;
                 if (employee.NumberOfReviews != null) {
                     employee.Standing = (employee.Rating / employee.NumberOfReviews);
                 }
+                db.Entry(employee).State = EntityState.Modified;
+
                 db.Reviews.Add(review);
                 db.SaveChanges();
                 return RedirectToAction("Index");

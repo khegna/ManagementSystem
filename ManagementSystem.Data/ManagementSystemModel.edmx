@@ -77,6 +77,7 @@
           <Property Name="Duration" Type="int" />
           <Property Name="ApprovalStatus" Type="nvarchar" MaxLength="75" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="SendTo" Type="nvarchar" MaxLength="75" />
         </EntityType>
         <EntityType Name="Vacation">
           <Key>
@@ -87,6 +88,7 @@
           <Property Name="Duration" Type="int" />
           <Property Name="AprovalStatus" Type="nvarchar" MaxLength="75" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="SendTo" Type="nvarchar" MaxLength="75" />
         </EntityType>
         <Association Name="FkDepartmentId">
           <End Role="Department" Type="Self.Department" Multiplicity="1" />
@@ -312,6 +314,7 @@
           <Property Name="Duration" Type="Int32" />
           <Property Name="ApprovalStatus" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="SendTo" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Employee" Relationship="ManagementSystemModel.FkEmployeeSickLeaveId" FromRole="SickLeave" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Vacation">
@@ -323,6 +326,7 @@
           <Property Name="Duration" Type="Int32" />
           <Property Name="AprovalStatus" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="SendTo" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Employee" Relationship="ManagementSystemModel.FkEmployeeVacationId" FromRole="Vacation" ToRole="Employee" />
         </EntityType>
         <Association Name="FkEmployeeComplaintId">
@@ -474,6 +478,7 @@
           <EntitySetMapping Name="SickLeaves">
             <EntityTypeMapping TypeName="ManagementSystemModel.SickLeave">
               <MappingFragment StoreEntitySet="SickLeave">
+                <ScalarProperty Name="SendTo" ColumnName="SendTo" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="ApprovalStatus" ColumnName="ApprovalStatus" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
@@ -485,6 +490,7 @@
           <EntitySetMapping Name="Vacations">
             <EntityTypeMapping TypeName="ManagementSystemModel.Vacation">
               <MappingFragment StoreEntitySet="Vacation">
+                <ScalarProperty Name="SendTo" ColumnName="SendTo" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="AprovalStatus" ColumnName="AprovalStatus" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />

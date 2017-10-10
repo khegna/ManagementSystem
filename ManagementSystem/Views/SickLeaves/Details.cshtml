@@ -4,14 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h3>Sick Leave request details</h3>
 
 <div>
-    <h4>SickLeave</h4>
+   
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
+            Start Date
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Duration)
+            Duration
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ApprovalStatus)
+            Approval Status
         </dt>
 
         <dd>
@@ -35,16 +35,25 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Employee.FirstName)
+            Name
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Employee.FirstName)
+            @Html.DisplayFor(model => model.Employee.LastName)
+
+        </dd>
+        <dt>
+            Username
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.Username)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SickLeaveId }) |
+   @* @Html.ActionLink("Edit", "Edit", new { id = Model.SickLeaveId }) |*@
     @Html.ActionLink("Back to List", "Index")
 </p>

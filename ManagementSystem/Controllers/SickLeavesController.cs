@@ -131,7 +131,7 @@ namespace ManagementSystem.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "SickLeaveId,StartDate,Duration,ApprovalStatus,EmployeeId")] SickLeave sickLeave)
-        {
+        {  
             if (ModelState.IsValid)
             {
                 if (sickLeave.ApprovalStatus == "Approved")

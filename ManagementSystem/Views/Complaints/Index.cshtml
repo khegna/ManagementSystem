@@ -4,25 +4,21 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h3><b>Employee Complaints</b></h3>
+</br>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ComplaintDescription)
+            Complaint Description
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateFiled)
+            Date Filed
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Resolved)
         </th>
         <th>
             Name
-           @* @Html.DisplayNameFor(model => model.Employee.FirstName)*@
         </th>
         <th></th>
     </tr>
@@ -48,7 +44,7 @@
             if ((ViewBag.sessionID).JobTitle == "Human Resources")
             {
 
-               @Html.ActionLink("Edit", "Edit", new { id = item.ComplaintId }) 
+               @Html.ActionLink("Resolved Edit", "Edit", new { id = item.ComplaintId }) 
              @:| 
 
           }

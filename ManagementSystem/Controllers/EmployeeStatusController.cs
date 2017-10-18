@@ -46,13 +46,20 @@ namespace ManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EmployeeStatusId,StartDate,TreminationDate,FinalDate,CurrentStatus")] EmployeeStatu employeeStatu)
+        public ActionResult Create([Bind(Include = "EmployeeStatusId,TreminationDate,FinalDate")] EmployeeStatu employeeStatu)
         {
             if (ModelState.IsValid)
             {
+                var session = (Employee)Session["employee"];
+                employeeStatu.EmployeeId = session.EmployeeId;
+                employeeStatu.FinalDate = DateTime.Today.AddDays(14);
+                ViewBag.FirstName = session.FirstName;
+                ViewBag.LastName = session.LastName;
+                ViewBag.LastDay = employeeStatu.FinalDate;
+                db.Entry(employeeStatu).State = EntityState.Modified;
                 db.EmployeeStatus.Add(employeeStatu);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Resignation");
             }
 
             return View(employeeStatu);
@@ -78,7 +85,7 @@ namespace ManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EmployeeStatusId,StartDate,TreminationDate,FinalDate,CurrentStatus")] EmployeeStatu employeeStatu)
+        public ActionResult Edit([Bind(Include = "EmployeeStatusId,TreminationDate,FinalDate")] EmployeeStatu employeeStatu)
         {
             if (ModelState.IsValid)
             {
@@ -122,6 +129,14 @@ namespace ManagementSystem.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Resignation()
+        {
+            var session = (Employee)Session["employee"];
+            ViewBag.FirstName = session.FirstName;
+            ViewBag.LastName = session.LastName;
+            ViewBag.LastDay = DateTime.Today.AddDays(14);
+            return View();
         }
     }
 }

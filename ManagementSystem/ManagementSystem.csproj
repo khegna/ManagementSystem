@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -279,6 +280,7 @@
     <Content Include="Views\EmployeeStatus\Edit.cshtml" />
     <Content Include="Views\EmployeeStatus\Index.cshtml" />
     <Content Include="Views\Employee\logout.cshtml" />
+    <Content Include="Views\EmployeeStatus\Resignation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

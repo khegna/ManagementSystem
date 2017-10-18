@@ -18,6 +18,7 @@ namespace ManagementSystem.Data
         public Employee()
         {
             this.Complaints = new HashSet<Complaint>();
+            this.EmployeeStatus = new HashSet<EmployeeStatu>();
             this.Reviews = new HashSet<Review>();
             this.SickLeaves = new HashSet<SickLeave>();
             this.Vacations = new HashSet<Vacation>();
@@ -39,10 +40,14 @@ namespace ManagementSystem.Data
         public int EmployeeStatusId { get; set; }
         public Nullable<int> NumberOfReviews { get; set; }
         public Nullable<int> Standing { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public string CurrentStatus { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Complaint> Complaints { get; set; }
         public virtual Department Department { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeeStatu> EmployeeStatus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review> Reviews { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

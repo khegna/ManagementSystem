@@ -83,6 +83,22 @@
         </dd>
 
         <dt>
+            Number Of Reviews
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfReviews)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Standing)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Standing)
+        </dd>
+
+
+        <dt>
             Sick Days Left
         </dt>
 
@@ -103,7 +119,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EmployeeStatu.CurrentStatus)
+            @Html.DisplayFor(model => model.CurrentStatus)
+        </dd>
+        <dt>
+            Start Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
         </dd>
 
     </dl>

@@ -47,16 +47,17 @@
           <Property Name="EmployeeStatusId" Type="int" Nullable="false" />
           <Property Name="NumberOfReviews" Type="int" />
           <Property Name="Standing" Type="int" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="CurrentStatus" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="EmployeeStatus">
           <Key>
             <PropertyRef Name="EmployeeStatusId" />
           </Key>
           <Property Name="EmployeeStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StartDate" Type="date" />
           <Property Name="TreminationDate" Type="date" />
           <Property Name="FinalDate" Type="date" />
-          <Property Name="CurrentStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeId" Type="int" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -90,6 +91,18 @@
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="SendTo" Type="nvarchar" MaxLength="75" />
         </EntityType>
+        <Association Name="FK__EmployeeS__Emplo__47DBAE45">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="EmployeeStatus" Type="Self.EmployeeStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeStatus">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FkDepartmentId">
           <End Role="Department" Type="Self.Department" Multiplicity="1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
@@ -170,6 +183,10 @@
           <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SickLeave" EntityType="Self.SickLeave" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vacation" EntityType="Self.Vacation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__EmployeeS__Emplo__47DBAE45" Association="Self.FK__EmployeeS__Emplo__47DBAE45">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeStatus" EntitySet="EmployeeStatus" />
+          </AssociationSet>
           <AssociationSet Name="FkDepartmentId" Association="Self.FkDepartmentId">
             <End Role="Department" EntitySet="Department" />
             <End Role="Employee" EntitySet="Employee" />
@@ -214,6 +231,10 @@
           <AssociationSet Name="FkDepartmentId" Association="ManagementSystemModel.FkDepartmentId">
             <End Role="Department" EntitySet="Departments" />
             <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EmployeeS__Emplo__47DBAE45" Association="ManagementSystemModel.FK__EmployeeS__Emplo__47DBAE45">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmployeeStatu" EntitySet="EmployeeStatus" />
           </AssociationSet>
           <AssociationSet Name="FkEmployeeReviewId" Association="ManagementSystemModel.FkEmployeeReviewId">
             <End Role="Employee" EntitySet="Employees" />
@@ -276,8 +297,11 @@
           <Property Name="EmployeeStatusId" Type="Int32" Nullable="false" />
           <Property Name="NumberOfReviews" Type="Int32" />
           <Property Name="Standing" Type="Int32" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="CurrentStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Complaints" Relationship="ManagementSystemModel.FkEmployeeComplaintId" FromRole="Employee" ToRole="Complaint" />
           <NavigationProperty Name="Department" Relationship="ManagementSystemModel.FkDepartmentId" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="EmployeeStatus" Relationship="ManagementSystemModel.FK__EmployeeS__Emplo__47DBAE45" FromRole="Employee" ToRole="EmployeeStatu" />
           <NavigationProperty Name="Reviews" Relationship="ManagementSystemModel.FkEmployeeReviewId" FromRole="Employee" ToRole="Review" />
           <NavigationProperty Name="SickLeaves" Relationship="ManagementSystemModel.FkEmployeeSickLeaveId" FromRole="Employee" ToRole="SickLeave" />
           <NavigationProperty Name="EmployeeStatu" Relationship="ManagementSystemModel.FkEmployeeStatusId" FromRole="Employee" ToRole="EmployeeStatu" />
@@ -288,10 +312,10 @@
             <PropertyRef Name="EmployeeStatusId" />
           </Key>
           <Property Name="EmployeeStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StartDate" Type="DateTime" Precision="0" />
           <Property Name="TreminationDate" Type="DateTime" Precision="0" />
           <Property Name="FinalDate" Type="DateTime" Precision="0" />
-          <Property Name="CurrentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="ManagementSystemModel.FK__EmployeeS__Emplo__47DBAE45" FromRole="EmployeeStatu" ToRole="Employee" />
           <NavigationProperty Name="Employees" Relationship="ManagementSystemModel.FkEmployeeStatusId" FromRole="EmployeeStatu" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Review">
@@ -350,6 +374,18 @@
             </Principal>
             <Dependent Role="Employee">
               <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EmployeeS__Emplo__47DBAE45">
+          <End Type="ManagementSystemModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ManagementSystemModel.EmployeeStatu" Role="EmployeeStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeStatu">
+              <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -434,6 +470,8 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="ManagementSystemModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="Standing" ColumnName="Standing" />
                 <ScalarProperty Name="NumberOfReviews" ColumnName="NumberOfReviews" />
                 <ScalarProperty Name="EmployeeStatusId" ColumnName="EmployeeStatusId" />
@@ -456,10 +494,9 @@
           <EntitySetMapping Name="EmployeeStatus">
             <EntityTypeMapping TypeName="ManagementSystemModel.EmployeeStatu">
               <MappingFragment StoreEntitySet="EmployeeStatus">
-                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="FinalDate" ColumnName="FinalDate" />
                 <ScalarProperty Name="TreminationDate" ColumnName="TreminationDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="EmployeeStatusId" ColumnName="EmployeeStatusId" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -109,10 +109,11 @@ namespace ManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EmployeeId,FirstName,LastName,Username,EmployeePassword,Email,Salary,VacationDays,JobTitle,ManagerId,Rating,SickDaysTotal,DepartmentId,EmployeeStatusId")] Employee employee)
+        public ActionResult Create([Bind(Include = "EmployeeId,FirstName,LastName,Username,EmployeePassword,Email,Salary,VacationDays,JobTitle,ManagerId,Rating,SickDaysTotal,DepartmentId,EmployeeStatusId,StartDate,CurrentStatus")] Employee employee)
         {
             if (ModelState.IsValid)
             {
+        
                 db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");

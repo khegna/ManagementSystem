@@ -48,6 +48,9 @@
             <th>
                 Current Status
             </th>
+            <th>
+                Current Status
+            </th>
             <th>Action</th>
         </tr>
 
@@ -79,7 +82,10 @@
                     @Html.DisplayFor(modelItem => item.Department.DepartmentName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EmployeeStatu.CurrentStatus)
+                    @Html.DisplayFor(modelItem => item.CurrentStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId }) |

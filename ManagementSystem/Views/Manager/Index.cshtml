@@ -5,10 +5,11 @@
 }
 <div style="font-family:Arial">
     <h2>Index</h2>
-
+@*
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
+*@
     <p>
         @using (Html.BeginForm("Index","Manager",FormMethod.Get)) {
         <b>Seach By</b> @Html.RadioButton("searchBy", "Name",true) <text>Lastname</text>
@@ -49,9 +50,9 @@
                 Current Status
             </th>
             <th>
-                Current Status
+                Start Date
             </th>
-            <th>Action</th>
+            <th></th>
         </tr>
 
         @foreach (var item in Model)

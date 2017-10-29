@@ -66,6 +66,19 @@ namespace ManagementSystem.Controllers
             return View();
         }
 
+        public ActionResult GetSickLeavesByEmployee()
+        {
+            var session = (Employee)Session["employee"];
+
+            var sickLeaveByEmployee = (db.SickLeaves.Where(x => x.Employee.EmployeeId == session.EmployeeId).ToList());
+            return View(sickLeaveByEmployee);
+
+        }
+        public ActionResult SickLeaveRequestSuccess()
+        {
+            return View();
+        }
+
         // GET: SickLeaves/Details/5
         public ActionResult Details(int? id)
         {
@@ -101,7 +114,7 @@ namespace ManagementSystem.Controllers
                 sickLeave.ApprovalStatus = "Request Pending";
                 db.SickLeaves.Add(sickLeave);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("SickLeaveRequestSuccess");
             }
 
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName", sickLeave.EmployeeId);

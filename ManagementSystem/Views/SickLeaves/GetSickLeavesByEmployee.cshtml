@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ManagementSystem.Data.SickLeave>
+
+@{
+    ViewBag.Title = "GetSickLeavesByEmployee";
+}
+
+<h3>My Sick Leave Requests</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Start Date
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th>
+            Approval Status
+        </th>
+        <th>
+            Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Duration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApprovalStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.FirstName)
+            @Html.DisplayFor(modelItem => item.Employee.LastName)
+        </td>
+        <td>
+            
+            @Html.ActionLink("Details", "Details", new { id=item.SickLeaveId }) 
+        </td>
+    </tr>
+}
+
+</table>

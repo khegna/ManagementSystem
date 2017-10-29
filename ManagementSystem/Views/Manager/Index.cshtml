@@ -4,12 +4,8 @@
     ViewBag.Title = "Index";
 }
 <div style="font-family:Arial">
-    <h2>Index</h2>
-@*
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-*@
+    <h2>My Employees</h2>
+    <br>
     <p>
         @using (Html.BeginForm("Index","Manager",FormMethod.Get)) {
         <b>Seach By</b> @Html.RadioButton("searchBy", "Name",true) <text>Lastname</text>
@@ -23,10 +19,7 @@
     <table class="table" border="1">
         <tr>
             <th>
-                First Name
-            </th>
-            <th>
-                Last Name
+                Name
             </th>
             <th>
                 Salary
@@ -52,7 +45,7 @@
             <th>
                 Start Date
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
 
         @foreach (var item in Model)
@@ -60,8 +53,6 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.LastName)
                 </td>
                 <td>

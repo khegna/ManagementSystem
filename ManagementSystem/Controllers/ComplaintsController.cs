@@ -35,6 +35,20 @@ namespace ManagementSystem.Controllers
             return View(complaints.ToList());
         }
 
+
+        public ActionResult GetComplaintsByEmployee()
+        {
+            var session = (Employee)Session["employee"];
+
+            var complaintsByEmployee = (db.Complaints.Where(x => x.Employee.EmployeeId == session.EmployeeId).ToList());
+            return View(complaintsByEmployee);
+
+        }
+        public ActionResult ComplaintRequestSuccess()
+        {
+            return View();
+        }
+
         // GET: Complaints/Details/5
         public ActionResult Details(int? id)
         {
@@ -87,7 +101,7 @@ namespace ManagementSystem.Controllers
                 complaint.DateFiled = System.DateTime.Now;
                 db.Complaints.Add(complaint);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ComplaintRequestSuccess");
             }
 
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName", complaint.EmployeeId);

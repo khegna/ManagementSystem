@@ -64,6 +64,14 @@ namespace ManagementSystem.Controllers
             }
             return View();
         }
+        public ActionResult GetVacationByEmployee() {
+            var session = (Employee)Session["employee"];
+
+            var vacationByEmployee = (db.Vacations.Where(x => x.Employee.EmployeeId == session.EmployeeId).ToList());
+            return View(vacationByEmployee);
+
+        }
+
 
         // GET: Vacations/Details/5
         public ActionResult Details(int? id)
@@ -100,11 +108,15 @@ namespace ManagementSystem.Controllers
                 vacation.AprovalStatus = "Request Pending";
                 db.Vacations.Add(vacation);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("VacationRequestSuccess");
             }
 
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName", vacation.EmployeeId);
             return View(vacation);
+        }
+        public ActionResult VacationRequestSuccess()
+        {
+            return View();
         }
 
         // GET: Vacations/Edit/5

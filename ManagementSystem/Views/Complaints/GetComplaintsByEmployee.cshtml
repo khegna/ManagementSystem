@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ManagementSystem.Data.Complaint>
+
+@{
+    ViewBag.Title = "GetComplaintsByEmployee";
+}
+
+<h3>My Complaints</h3>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Complaint Description
+        </th>
+        <th>
+            Date Filed
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Resolved)
+        </th>
+
+        <th>
+            Name
+        </th>
+  
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ComplaintDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateFiled)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Resolved)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.FirstName)
+            @Html.DisplayFor(modelItem => item.Employee.LastName)
+        </td>
+
+    </tr>
+}
+
+</table>

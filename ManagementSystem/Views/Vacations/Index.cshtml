@@ -3,80 +3,78 @@
 @{
     ViewBag.Title = "Index";
 }
-<br />
-<h2><b>Vacation Requests</b></h2>
-<br />
-@*
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-*@
-@if (ViewBag.SessionTitle == "Manager")
-{
-    <p>
-        @using (Html.BeginForm("Index", "Vacations", FormMethod.Get))
-        {
-            <b>Search By: </b> @Html.RadioButton("searchBy", "Approval Status", true) <text>Approval Status</text>
-            @Html.RadioButton("searchBy", "Last name") <text>Last Name</text>
-            @Html.RadioButton("searchBy", "Duration") <text>Duration</text>
-            <br />
-            @Html.TextBox("search")<input type="submit" value="Search" />
-        }
-    </p>
-}
-@if (ViewBag.SessionTitle == "Human Resources")
-{
-    <p>
-        @using (Html.BeginForm("Index", "Vacations", FormMethod.Get))
-        {
-            <b>Search By: </b> @Html.RadioButton("searchBy", "Approval Status", true) <text>Approval Status</text>
-            @Html.RadioButton("searchBy", "Last name") <text>Last Name</text>
-            @Html.RadioButton("searchBy", "Duration") <text>Duration</text>
-            @Html.RadioButton("searchBy", "Need HR Approval") <text>Need HR Approval</text>
-            <br />
-            @Html.TextBox("search")<input type="submit" value="Search" />
-        }
-    </p>
-}
-<br />
-<table class="table">
-    <tr>
-        <th>
-            Start Date
-        </th>
-        <th>
-            Duration
-        </th>
-        <th>
-            Approval Status
-        </th>
-        <th>
-            Name
-        </th>
-        <th></th>
-    </tr>
+<div style="font-family:Arial">
+    <h2>Vacation Requests</h2>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Duration)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AprovalStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employee.FirstName)
-            @Html.DisplayFor(modelItem => item.Employee.LastName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit Approval Status", "Edit", new { id=item.VacationId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.VacationId }) |
-            @Html.ActionLink("Send To Human Resources", "Delete", new { id=item.VacationId })
-        </td>
-    </tr>
-}
+    <br>
+    @if (ViewBag.SessionTitle == "Manager")
+    {
+        <p>
+            @using (Html.BeginForm("Index", "Vacations", FormMethod.Get))
+            {
+                <b>Search By: </b> @Html.RadioButton("searchBy", "Approval Status", true) <text>Approval Status</text>
+                @Html.RadioButton("searchBy", "Last name") <text>Last Name</text>
+                @Html.RadioButton("searchBy", "Duration") <text>Duration</text>
+                <br />
+                @Html.TextBox("search")<input type="submit" value="Search" />
+            }
+        </p>
+    }
+    @if (ViewBag.SessionTitle == "Human Resources")
+    {
+        <p>
+            @using (Html.BeginForm("Index", "Vacations", FormMethod.Get))
+            {
+                <b>Search By: </b> @Html.RadioButton("searchBy", "Approval Status", true) <text>Approval Status</text>
+                @Html.RadioButton("searchBy", "Last name") <text>Last Name</text>
+                @Html.RadioButton("searchBy", "Duration") <text>Duration</text>
+                @Html.RadioButton("searchBy", "Need HR Approval") <text>Need HR Approval</text>
+                <br />
+                @Html.TextBox("search")<input type="submit" value="Search" />
+            }
+        </p>
+    }
 
-</table>
+    <table class="table" border="1">
+        <tr>
+            <th>
+                Start Date
+            </th>
+            <th>
+                Duration
+            </th>
+            <th>
+                Approval Status
+            </th>
+            <th>
+                Name
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AprovalStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                    @Html.DisplayFor(modelItem => item.Employee.LastName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit Approval Status", "Edit", new { id = item.VacationId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.VacationId }) |
+                    @Html.ActionLink("Send To Human Resources", "Delete", new { id = item.VacationId })
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

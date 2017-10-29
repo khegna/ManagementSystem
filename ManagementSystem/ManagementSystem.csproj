@@ -281,6 +281,12 @@
     <Content Include="Views\EmployeeStatus\Index.cshtml" />
     <Content Include="Views\Employee\logout.cshtml" />
     <Content Include="Views\EmployeeStatus\Resignation.cshtml" />
+    <Content Include="Views\Vacations\GetVacationByEmployee.cshtml" />
+    <Content Include="Views\Vacations\VacationRequestSuccess.cshtml" />
+    <Content Include="Views\SickLeaves\GetSickLeavesByEmployee.cshtml" />
+    <Content Include="Views\SickLeaves\SickLeaveRequestSuccess.cshtml" />
+    <Content Include="Views\Complaints\GetComplaintsByEmployee.cshtml" />
+    <Content Include="Views\Complaints\ComplaintRequestSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

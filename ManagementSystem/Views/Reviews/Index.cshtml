@@ -8,7 +8,7 @@
 <br>
 
 
-<table class="table">
+<table class="table" border="1">
     <tr>
         <th>
             Date Issued
@@ -22,7 +22,9 @@
         <th>
             Name
         </th>
-        <th></th>
+        <th>
+            Actions
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -41,11 +43,11 @@
             @Html.DisplayFor(modelItem => item.Employee.LastName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ReviewId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ReviewId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ReviewId })
-        </td>
-    </tr>
+            <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-default" > @Html.ActionLink("Edit", "Edit", new { id = item.ReviewId }) </button>
+                <button type="button" class="btn btn-default">@Html.ActionLink("Details", "Details", new { id = item.ReviewId })</button>
+            </div>
+        </tr>
 }
 
 </table>

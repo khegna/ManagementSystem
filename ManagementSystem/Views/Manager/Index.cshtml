@@ -132,10 +132,10 @@
                 </td>
                 <td>
                     <div class="btn-group btn-group-sm">
-                        <button type="button" class="btn btn-default"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>@Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId })</button>
+                        <button type="button" class="btn btn-default"> @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId })</button>
                         <button type="button" class="btn btn-default"> @Html.ActionLink("Details", "Details", new { id = item.EmployeeId }) </button>
                     </div>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                   
                 </td>
             </tr>
         }

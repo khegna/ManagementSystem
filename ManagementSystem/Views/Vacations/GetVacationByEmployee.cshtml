@@ -7,7 +7,7 @@
 <h3>My Vacation Requests</h3>
 
 
-<table class="table">
+<table class="table" border="1">
     <tr>
         <th>
             Start Date
@@ -21,7 +21,9 @@
         <th>
             Name
         </th>
-        <th></th>
+        <th>
+            Actions
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -40,7 +42,9 @@
             @Html.DisplayFor(modelItem => item.Employee.LastName)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id=item.VacationId }) 
+            <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-default"> @Html.ActionLink("Details", "Details", new { id = item.VacationId })</button>
+            </div>
         </td>
     </tr>
 }

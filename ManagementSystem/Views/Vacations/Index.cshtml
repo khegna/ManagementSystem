@@ -69,12 +69,36 @@
                     @Html.DisplayFor(modelItem => item.Employee.LastName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit Approval Status", "Edit", new { id = item.VacationId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.VacationId }) |
-                    @Html.ActionLink("Send To Human Resources", "Delete", new { id = item.VacationId })
+                    @if(ViewBag.SessionTitle == "Manager") {
+                       if (item.AprovalStatus == "Pending HR approval" || item.AprovalStatus == "Approved" || item.AprovalStatus == "Denied") {
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn disabled"> @Html.ActionLink("Details", "Details", new { id = item.VacationId })  </button>                    
+                        </div>
+
+                        }
+                        if (item.AprovalStatus == "" || item.AprovalStatus == "Request Pending")
+                        {
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-default"> @Html.ActionLink("Edit Approval Status", "Edit", new { id = item.VacationId })  </button>
+                        <button type="button" class="btn btn-default"> @Html.ActionLink("Details", "Details", new { id = item.VacationId })  </button>
+                        <button type="button" class="btn btn-default"> @Html.ActionLink("Send To Human Resources", "Delete", new { id = item.VacationId }) </button>
+                        </div>
+                        }
+                    }
+                    @if (ViewBag.SessionTitle == "Human Resources")
+                    {
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-default"> @Html.ActionLink("Edit Approval Status", "Edit", new { id = item.VacationId })</button>
+                            <button type="button" class="btn btn-default"> @Html.ActionLink("Details", "Details", new { id = item.VacationId })</button>
+                        </div>
+                    }
                 </td>
+
+
             </tr>
         }
 
+
     </table>
+
     </div>

@@ -98,17 +98,10 @@
             @Html.DisplayFor(model => model.Department.DepartmentName)
         </dd>
 
-        <dt>
-            Status
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.EmployeeStatu.CurrentStatus)
-        </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.EmployeeId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EmployeeId }) 
 </p>

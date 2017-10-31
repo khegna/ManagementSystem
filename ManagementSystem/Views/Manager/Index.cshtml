@@ -7,13 +7,14 @@
     <h2>My Employees</h2>
     <br>
     <p>
-        @using (Html.BeginForm("Index","Manager",FormMethod.Get)) {
-        <b>Seach By</b> @Html.RadioButton("searchBy", "Name",true) <text>Lastname</text>
-        @Html.RadioButton("searchBy", "Username") <text>Username</text>
-        @Html.RadioButton("searchBy", "Sickdays") <text>Sickdays</text>
-        @Html.RadioButton("searchBy", "DepartmentId") <text>DepartmentId</text>
-        @Html.RadioButton("searchBy", "JobTitle") <text>Job Title</text><br/>
-        @Html.TextBox("search")<input type="submit" value="Search"/>
+        @using (Html.BeginForm("Index", "Manager", FormMethod.Get))
+        {
+            <b>Seach By</b> @Html.RadioButton("searchBy", "Name", true) <text>Lastname</text>
+            @Html.RadioButton("searchBy", "Username") <text>Username</text>
+            @Html.RadioButton("searchBy", "Sickdays") <text>Sickdays</text>
+            @Html.RadioButton("searchBy", "DepartmentId") <text>DepartmentId</text>
+            @Html.RadioButton("searchBy", "JobTitle") <text>Job Title</text><br />
+            @Html.TextBox("search")<input type="submit" value="Search" />
         }
     </p>
     <table class="table" border="1">
@@ -65,7 +66,57 @@
                     @Html.DisplayFor(modelItem => item.JobTitle)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Standing)
+
+
+
+                    @if (item.Standing < 50)
+                    {
+                        <div class="cir"> @Html.DisplayFor(modelItem => item.Standing) </div>
+                        <style>
+                            .cir {
+                                background-color: red;
+                                width: 40px;
+                                height: 40px;
+                                border-radius: 40px;
+                                text-align: center;
+                                padding: 10px;
+                                color: white;
+                                background: red;
+                            }
+                        </style>
+                    }
+                    @if (item.Standing >= 50 && item.Standing < 85)
+                    {
+                        <div class="cir1"> @Html.DisplayFor(modelItem => item.Standing) </div>
+                        <style>
+                            .cir1 {
+                                background-color: red;
+                                width: 40px;
+                                height: 40px;
+                                border-radius: 40px;
+                                text-align: center;
+                                padding: 10px;
+                                color: white;
+                                background: orange;
+                            }
+                        </style>
+                    }
+                    @if (item.Standing >= 85)
+                    {
+                        <div class="cir2"> @Html.DisplayFor(modelItem => item.Standing) </div>
+                        <style>
+                            .cir2 {
+                                background-color: red;
+                                width: 40px;
+                                height: 40px;
+                                border-radius: 40px;
+                                text-align: center;
+                                padding: 10px;
+                                color: white;
+                                background: green;
+                            }
+                        </style>
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SickDaysTotal)
@@ -80,8 +131,11 @@
                     @Html.DisplayFor(modelItem => item.StartDate)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.EmployeeId }) 
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-default"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>@Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId })</button>
+                        <button type="button" class="btn btn-default"> @Html.ActionLink("Details", "Details", new { id = item.EmployeeId }) </button>
+                    </div>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </td>
             </tr>
         }

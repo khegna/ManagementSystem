@@ -40,31 +40,42 @@
                     @Html.DisplayFor(modelItem => item.Employee.LastName)
                 </td>
                 <td>
-                    @{
-                        if ((ViewBag.sessionID).JobTitle == "Human Resources")
+                   
+                        @if ((ViewBag.sessionID).JobTitle == "Human Resources")
                         {
-
-                            @Html.ActionLink("Resolved Edit", "Edit", new { id = item.ComplaintId })
-                            @:|
+                            if (item.Resolved == true && item.SendTo != "Manager")
+                            {
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-default"> @Html.ActionLink("Details", "Details", new { id = item.ComplaintId })</button>
+                                    <button type="button" class="btn btn-default"> @Html.ActionLink("Send to manager", "Delete", new { id = item.ComplaintId })</button>   
+                                </div>
+                            }
+                            if (item.SendTo == "Manager")
+                            {
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="disabled"> @Html.ActionLink("Details", "Details", new { id = item.ComplaintId })</button>
+                                </div>
+                            }
+                            if (item.Resolved == false || item.SendTo == "")
+                            {
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-default"> @Html.ActionLink("Details", "Details", new { id = item.ComplaintId })</button>
+                                    <button type="button" class="btn btn-default">@Html.ActionLink("Resolved Edit", "Edit", new { id = item.ComplaintId })</button>
+                                    <button type="button" class="btn btn-default"> @Html.ActionLink("Send to manager", "Delete", new { id = item.ComplaintId })</button>
+                                </div>
+                            }
 
                         }
-                    }
-
-
-                    @Html.ActionLink("Details", "Details", new { id = item.ComplaintId })
-                    @{
-                        if ((ViewBag.sessionID).JobTitle == "Human Resources")
-                        {
-                            @:|
-
-                            @Html.ActionLink("Send to manager", "Delete", new { id = item.ComplaintId })
-
-                        }
-                    }
+                       @if ((ViewBag.sessionID).JobTitle == "Manager")
+                       {
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-default"> @Html.ActionLink("Review Complaint", "Details", new { id = item.ComplaintId })</button>
+                        </div>
+                       }
 
                 </td>
             </tr>
-                        }
+        }
 
     </table>
 </div>

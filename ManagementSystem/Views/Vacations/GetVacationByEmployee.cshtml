@@ -4,7 +4,7 @@
     ViewBag.Title = "GetVacationByEmployee";
 }
 
-<h3>My Vacation Requests</h3>
+<h2>My Vacation Requests</h2>
 
 
 <table class="table" border="1">
@@ -29,7 +29,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
+            @item.StartDate.Value.ToShortDateString()
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Duration)

@@ -56,7 +56,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
+                    @item.StartDate.Value.ToShortDateString()
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Duration)
@@ -76,7 +76,8 @@
                         </div>
 
                     }
-                    else { 
+                    else
+                    {
                     <div class="btn-group btn-group-sm">
                         <button type="button" class="btn btn-default"> @Html.ActionLink("Edit Approval Status", "Edit", new { id = item.SickLeaveId }) </button>
                         <button type="button" class="btn btn-default">@Html.ActionLink("Details", "Details", new { id = item.SickLeaveId }) </button>

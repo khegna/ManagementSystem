@@ -18,7 +18,56 @@ namespace ManagementSystem.Controllers
             _userRepository = new EmployeeRepository();
         }
 
-    public ActionResult login()
+        [AllowAnonymous]
+        public ActionResult SmartLogin(string returnUrl) {
+            ViewBag.ReturnUrl = returnUrl;
+            var employeeSession = (Employee)Session["employee"];
+
+            if (employeeSession != null)
+            {
+                return RedirectToAction("WelcomePage", "Employee", new { employee = Session["employee"] });
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult SmartLogin(Employee employee)
+        {
+            var employeeLoggedIn = _userRepository.EmployeeLoggedInSmart(employee);
+            if (employeeLoggedIn != null)
+            {
+                ViewBag.message = "loggedin";
+                ViewBag.triedOnce = "yes";
+
+
+                Session["employee"] = employeeLoggedIn;
+
+                var employeeS = (Employee)Session["employee"];
+                ViewBag.employeeTitle = employeeS.JobTitle;
+
+                return RedirectToAction("WelcomePage", "Employee", new { username = employeeLoggedIn?.Username });
+            }
+            else
+            {
+                ViewBag.triedOnce = "yes";
+                return View();
+            }
+
+
+        }
+
+
+
+
+
+
+
+        public ActionResult login()
     {
         var employeeSession = (Employee)Session["employee"];
 

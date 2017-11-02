@@ -30,14 +30,11 @@
             @item.Employee.LastName
         </td>
         <td>
-            @{
-                var date = item.TreminationDate.ToString();
-                var formattedDate = string.Format(date, "MM/dd/yyyy");
-               @formattedDate
-             }
+               @item.TreminationDate.Value.ToShortDateString()
+             
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FinalDate)
+            @item.FinalDate.Value.ToShortDateString()
         </td>
 
         <td>

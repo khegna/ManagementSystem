@@ -37,6 +37,12 @@ namespace ManagementSystem.Business.EmployeeRepository
             return employeeLoggedIn;
 
         }
+        public Employee EmployeeLoggedInSmart(Employee employee)
+        {
+            var employeeLoggedIn = _dbContext.Employees.Where(x => x.Email == employee.Email && x.EmployeePassword == employee.EmployeePassword).FirstOrDefault();
+            return employeeLoggedIn;
+
+        }
 
         public Employee GetEmployeeById(int employeeId)
         {

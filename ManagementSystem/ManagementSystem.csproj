@@ -230,6 +230,13 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="smartlogin\css\style.css" />
+    <Content Include="smartlogin\images\arrow.png" />
+    <Content Include="smartlogin\images\bg3.jpg" />
+    <Content Include="smartlogin\images\mail.png" />
+    <Content Include="smartlogin\images\pass.png" />
+    <Content Include="smartlogin\index.html" />
+    <Content Include="smartlogin\w3layouts-License.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -288,6 +295,7 @@
     <Content Include="Views\Complaints\GetComplaintsByEmployee.cshtml" />
     <Content Include="Views\Complaints\ComplaintRequestSuccess.cshtml" />
     <Content Include="Views\EmployeeStatus\FireEmployee.cshtml" />
+    <Content Include="Views\Employee\SmartLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

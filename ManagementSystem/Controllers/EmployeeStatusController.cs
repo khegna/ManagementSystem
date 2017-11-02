@@ -38,12 +38,10 @@ namespace ManagementSystem.Controllers
         // GET: EmployeeStatus/Create
         public ActionResult Create()
         {
+            ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName");
             return View();
         }
 
-        // POST: EmployeeStatus/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "EmployeeStatusId,TreminationDate,FinalDate")] EmployeeStatu employeeStatu)
@@ -56,6 +54,29 @@ namespace ManagementSystem.Controllers
                 ViewBag.FirstName = session.FirstName;
                 ViewBag.LastName = session.LastName;
                 ViewBag.LastDay = employeeStatu.FinalDate;
+                db.Entry(employeeStatu).State = EntityState.Modified;
+                db.EmployeeStatus.Add(employeeStatu);
+                db.SaveChanges();
+                return RedirectToAction("Resignation");
+            }
+            ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName", employeeStatu.EmployeeId);
+            return View(employeeStatu);
+        }
+        public ActionResult FireEmployee()
+        {
+            ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName");
+            ViewBag.FinalDay = DateTime.Today.AddDays(14);
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult FireEmployee([Bind(Include = "EmployeeId,TreminationDate,FinalDate")] EmployeeStatu employeeStatu)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                employeeStatu.FinalDate = DateTime.Today.AddDays(14);
                 db.Entry(employeeStatu).State = EntityState.Modified;
                 db.EmployeeStatus.Add(employeeStatu);
                 db.SaveChanges();

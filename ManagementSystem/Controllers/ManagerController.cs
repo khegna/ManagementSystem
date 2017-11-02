@@ -113,7 +113,6 @@ namespace ManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-        
                 db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");

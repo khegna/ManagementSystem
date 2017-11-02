@@ -287,6 +287,7 @@
     <Content Include="Views\SickLeaves\SickLeaveRequestSuccess.cshtml" />
     <Content Include="Views\Complaints\GetComplaintsByEmployee.cshtml" />
     <Content Include="Views\Complaints\ComplaintRequestSuccess.cshtml" />
+    <Content Include="Views\EmployeeStatus\FireEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

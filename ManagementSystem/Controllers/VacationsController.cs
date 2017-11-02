@@ -41,7 +41,8 @@ namespace ManagementSystem.Controllers
 
             if (session.JobTitle == "Human Resources")
             {
-                var vacation = db.Vacations.Include(s => s.Employee);
+              
+               var vacation = (db.Vacations.Where(x => x.AprovalStatus == "Pending HR Approval").ToList());
                 if (searchBy == "Approval Status")
                 {
                     return View(vacation.Where(x => x.AprovalStatus.StartsWith(search)).ToList());
@@ -132,9 +133,10 @@ namespace ManagementSystem.Controllers
                 return HttpNotFound();
             }
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName", vacation.EmployeeId);
-
+            var session = (Employee)Session["employee"];
+            ViewBag.sessionTitle = session.JobTitle;
             ViewBag.Employees = db.Employees.Where(x => x.EmployeeId == vacation.EmployeeId).FirstOrDefault();
-         
+            ViewBag.daysAfter = (ViewBag.Employees).VacationDays - vacation.Duration;
 
             return View(vacation);
         }
@@ -160,6 +162,7 @@ namespace ManagementSystem.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName", vacation.EmployeeId);
             return View(vacation);
         }

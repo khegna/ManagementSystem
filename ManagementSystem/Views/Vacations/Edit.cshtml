@@ -19,15 +19,9 @@
         <h4>Employee currently has <b> @ViewBag.Employees.VacationDays </b> vacation days left for this period</h4>
         <h4>Employee will have <b> @(ViewBag.Employees.VacationDays - Model.Duration ) </b> vacation days left after approval</h4>
 
-
-
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.VacationId)
-
-
-
-
 
 
         <div class="form-group">
@@ -74,12 +68,25 @@
             @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
         </div>
     </div>
-
+        @if (ViewBag.sessionTitle == "Manager" && ViewBag.daysAfter<0)
+        {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="btn-group btn-group-sm">
+                    <button type="button" class="btn btn-default" disabled> Submit</button>
+                </div>
+            </div>
+        </div>
+        }
+        else
+    {
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
+    }
+    
     </div>
 }
 

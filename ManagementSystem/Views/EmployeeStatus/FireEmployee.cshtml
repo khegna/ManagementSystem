@@ -1,0 +1,78 @@
+﻿@model ManagementSystem.Data.EmployeeStatu
+
+@{
+    ViewBag.Title = "FireEmployee";
+}
+
+<h2>Fire an Employee</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @*
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.EmployeeStatusId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EmployeeStatusId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.EmployeeStatusId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+        *@
+        <div class="form-group">
+            @Html.LabelFor(model => model.TreminationDate, "Termination Date",htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TreminationDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TreminationDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*
+    <div class="form-group">
+        @Html.LabelFor(model => model.FinalDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FinalDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.FinalDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+        *@
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmployeeId, "Employee Id", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.DropDownList("EmployeeId", null, htmlAttributes: new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Fire" class="btn btn-warning" />
+            </div>
+        </div>
+    </div>
+    <h4>This employee's last day will be two weeks from the Termination Date</h4>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#TreminationDate").datepicker();
+    });
+</script>

@@ -26,6 +26,7 @@
         <!--main-->
         <div class="main-w3l">
             <div class="w3layouts-main">
+
                 <h2>Login Now</h2>
                 @using (Html.BeginForm("SmartLogin", "Employee", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
                     @Html.AntiForgeryToken()

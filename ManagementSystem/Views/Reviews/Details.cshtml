@@ -4,14 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Review Details</h2>
 
 <div>
-    <h4>Review</h4>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.DateIssued)
+            Date Issued
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ReviewDescription)
+            Description
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ReviewWeight)
+           Weight
         </dt>
 
         <dd>
@@ -35,11 +35,12 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Employee.FirstName)
+            Name
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Employee.FirstName)
+            @Html.DisplayFor(model => model.Employee.LastName)
         </dd>
 
     </dl>

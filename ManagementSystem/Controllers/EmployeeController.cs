@@ -83,7 +83,8 @@ namespace ManagementSystem.Controllers
         public ActionResult logout()
         {
             Session["employee"] = null;
-            return View(new { employee = Session["employee"] });
+            return RedirectToAction("SmartLogin", "Employee");
+            //return View(new { employee = Session["employee"] });
         }
         [HttpPost]
     public ActionResult login(Employee employee)

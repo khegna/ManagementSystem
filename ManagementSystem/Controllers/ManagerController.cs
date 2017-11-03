@@ -25,6 +25,7 @@ namespace ManagementSystem.Controllers
         public ActionResult Index(string searchBy, string search)
         {
             var session = (Employee)Session["employee"];
+            ViewBag.title = session.JobTitle;
             if (session.JobTitle == "Manager")
             {
                 var employeeByManager = (db.Employees.Where(x => x.ManagerId == session.EmployeeId).ToList());
@@ -109,10 +110,12 @@ namespace ManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EmployeeId,FirstName,LastName,Username,EmployeePassword,Email,Salary,VacationDays,JobTitle,ManagerId,Rating,SickDaysTotal,DepartmentId,EmployeeStatusId,StartDate,CurrentStatus")] Employee employee)
+        public ActionResult Create([Bind(Include = "EmployeeId,FirstName,LastName,Username,EmployeePassword,Email,Salary,VacationDays,JobTitle,ManagerId,Rating,SickDaysTotal,DepartmentId,EmployeeStatusId,StartDate")] Employee employee)
         {
             if (ModelState.IsValid)
             {
+                employee.EmployeeStatusId = 1;
+               employee.CurrentStatus = "Active";
                 db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");

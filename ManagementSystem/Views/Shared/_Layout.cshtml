@@ -6,241 +6,359 @@
 @using ManagementSystem.Business.Repository;
 @using ManagementSystem.Data;
 @using ManagementSystem.Business.EmployeeRepository;
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Management System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+
+
+
+
+
+
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">@(((Employee)Session["employee"]).FirstName) @(((Employee)Session["employee"]).LastName)</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Profile<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Profile", "MyProfile", "Employee")</li>
+                                <li>@Html.ActionLink("Put in a two weeks notice", "Create", "EmployeeStatus")</li>
+                                <li class="divider"></li>
+                                <li>@Html.ActionLink("Logout", "logout", "Employee")</li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                }
+
+
+
+
+                @if (((Employee)Session["employee"]) != null && ((Employee)Session["employee"]).JobTitle == "Human Resources")
+                {
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Employees <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("Employees", "Index", "Manager")</li>
+                                    <li>@Html.ActionLink("Complaints", "Index", "Complaints")</li>
+                                    <li>@Html.ActionLink("Vacations", "Index", "Vacations")</li>
+                                    <li>@Html.ActionLink("Reviews", "Index", "Reviews")</li>
+                                    <li>@Html.ActionLink("Sick Leave", "Index", "SickLeaves")</li>
+                                    <li>@Html.ActionLink("Termination Requests", "Index", "EmployeeStatus")</li>
+                                    <li class="divider"></li>
+                                    <li>@Html.ActionLink("Add new employee", "Create", "Manager")</li>
+                                    <li>@Html.ActionLink("Fire Employee", "FireEmployee", "EmployeeStatus")</li>
+
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Vacation <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("My Vacation Requests", "GetVacationByEmployee", "Vacations")</li>
+                                    <li class="divider"></li>
+                                    <li>@Html.ActionLink("Request Vacation", "Create", "Vacations")</li>
+
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sick Leave <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("My Sick Leave Requests", "GetSickLeavesByEmployee", "SickLeaves")</li>
+                                    <li class="divider"></li>
+                                    <li>@Html.ActionLink("Request Sick Leave", "Create", "SickLeaves")</li>
+
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Complaint<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("My Complaints", "GetComplaintsByEmployee", "Complaints")</li>
+                                    <li class="divider"></li>
+                                    <li>@Html.ActionLink("Write a Complaint", "Create", "Complaints")</li>
+
+                                </ul>
+                            </li>
+
+
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">@(((Employee)Session["employee"]).FirstName) @(((Employee)Session["employee"]).LastName)</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Profile<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("Profile", "MyProfile", "Employee")</li>
+                                    <li>@Html.ActionLink("Put in a two weeks notice", "Create", "EmployeeStatus")</li>
+                                    <li class="divider"></li>
+                                    <li>@Html.ActionLink("Logout", "logout", "Employee")</li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                }
+                @if (((Employee)Session["employee"]) != null && ((Employee)Session["employee"]).JobTitle == "Employee")
+                {
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Vacation <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("My Vacation Requests", "GetVacationByEmployee", "Vacations")</li>
+                                    <li class="divider"></li>
+                                    <li>@Html.ActionLink("Request Vacation", "Create", "Vacations")</li>
+
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sick Leave <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("My Sick Leave Requests", "GetSickLeavesByEmployee", "SickLeaves")</li>
+                                    <li class="divider"></li>
+                                    <li>@Html.ActionLink("Request Sick Leave", "Create", "SickLeaves")</li>
+
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Complaint<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("My Complaints", "GetComplaintsByEmployee", "Complaints")</li>
+                                    <li class="divider"></li>
+                                    <li>@Html.ActionLink("Write a Complaint", "Create", "Complaints")</li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">@(((Employee)Session["employee"]).FirstName) @(((Employee)Session["employee"]).LastName)</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Profile<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("Profile", "MyProfile", "Employee")</li>
+                                    <li>@Html.ActionLink("Put in a two weeks notice", "Create", "EmployeeStatus")</li>
+                                    <li class="divider"></li>
+                                    <li>@Html.ActionLink("Logout", "logout", "Employee")</li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                }
+                @if (((Employee)Session["employee"]) == null)
+                {
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Login", "login", "Employee")</li>
+                        </ul>
+                    </div>
+                }
+
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Management System</p>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+    </html>
+*@
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Management System</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/themes/main-style.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300 " rel="stylesheet" type="text/css">
+    @*<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>*@
+    <title>Slide-Out Navigation Bar</title>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Management System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-    
-            
+    @*
+    <i class="fa fa-bars fa-2x toggle_menu"></i>
+    <div class="sidebar_menu">
+        <i class="fa fa-times"></i>
+        <center>
+            <a href="_Layout.cshtml"><h1 class="boxed_item">Kristin <span class="logo_bold">Hegna</span></h1></a>
+            <h2 class="logo_title">Manager</h2>
+        </center>
 
-            
-            @if (((Employee)Session["employee"])!=null && ((Employee)Session["employee"]).JobTitle == "Manager")
-            {
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                                  
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Employees <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Employees", "Index", "Manager")</li>
-                            <li>@Html.ActionLink("Complaints", "Index", "Complaints")</li>
-                            <li>@Html.ActionLink("Vacations", "Index", "Vacations")</li>
-                            <li>@Html.ActionLink("Sick Leave", "Index", "SickLeaves")</li>
+        <ul class="navigation_selection">
+            <li class="navigation_item">PROFILE</li>
+            <li class="navigation_item">
+                Employees
+                <ul>
+                            <li><a href="#" id="subdrop">ITEM</a>
+                            <li><a href="#" id="subdrop">ITEM1</a>
+                            <li><a href="#" id="subdrop">ITEM2</a>
+                </ul>
+            </li>
+
+            <li class="navigation_item">EDUCATION</li>
+            <li class="navigation_item">INTERESTS</li>
+            <li class="navigation_item">SKILLS</li>
+        </ul>
+        <center>
+            <a href="#">
+                <h1 class="boxed_item boxed_item_smaller">
+                    <i class="fa fa-user"></i>
+                    SIGN UP
+                </h1>
+            </a>
+        </center>
+    </div>
+    *@
+
+
+    @if (((Employee)Session["employee"]) != null && ((Employee)Session["employee"]).JobTitle == "Manager")
+    {
+
+        <i class="fa fa-bars fa-2x toggle_menu"></i>
+            <div class="sidebar_menu">
+                <i class="fa fa-times"></i>
+                <center>
+                    <a href="_Layout.cshtml"><h1 class="boxed_item">  @(((Employee)Session["employee"]).FirstName)  <span class="logo_bold">@(((Employee)Session["employee"]).LastName)</span></h1></a>
+                    <h2 class="logo_title">@(((Employee)Session["employee"]).JobTitle)</h2>
+                </center>
+
+                <ul class="navigation_selection">
+                    <li class="navigation_item">PROFILE
+                        <ul>
+                            <li id="subdrop">@Html.ActionLink("Profile", "MyProfile", "Employee")</li>
+                            <li id="subdrop">@Html.ActionLink("Logout", "logout", "Employee")</li>
                         </ul>
                     </li>
 
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Reviews <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Reviews", "Index", "Reviews")</li>
-                            <li class="divider"></li>
-                            <li>@Html.ActionLink("Write a Review", "Create", "Reviews")</li>
+                    <li class="navigation_item">
+                        EMPLOYEES
+                        <ul>
 
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Vacation <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("My Vacation Requests", "GetVacationByEmployee", "Vacations")</li>
-                            <li class="divider"></li>
-                            <li>@Html.ActionLink("Request Vacation", "Create", "Vacations")</li>
-
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sick Leave <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("My Sick Leave Requests", "GetSickLeavesByEmployee", "SickLeaves")</li>
-                            <li class="divider"></li>
-                            <li>@Html.ActionLink("Request Sick Leave", "Create", "SickLeaves")</li>
-
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Complaint<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("My Complaints", "GetComplaintsByEmployee", "Complaints")</li>
-                            <li class="divider"></li>
-                            <li>@Html.ActionLink("Write a Complaint", "Create", "Complaints")</li>
-
+                            <li id="subdrop">@Html.ActionLink("Employees", "Index", "Manager")</li>
+                            <li id="subdrop">@Html.ActionLink("Complaints", "Index", "Complaints")</li>
+                            <li id="subdrop">@Html.ActionLink("Vacations", "Index", "Vacations")</li>
+                            <li id="subdrop">@Html.ActionLink("Sick Leave", "Index", "SickLeaves")</li>
                         </ul>
                     </li>
 
+                    <li class="navigation_item">
+                        MY EMPLOYEE REVIEWS
+                        <ul>
+                            <li id="subdrop">@Html.ActionLink("Reviews", "Index", "Reviews")</li>
+                            <li id="subdrop">@Html.ActionLink("Write a Review", "Create", "Reviews")</li>
+                        </ul>
+                    </li>
+
+                    <li class="navigation_item">VACATION
+                        <ul>
+                            <li id="subdrop">@Html.ActionLink("My Vacation Requests", "GetVacationByEmployee", "Vacations")</li>
+                            <li id="subdrop">@Html.ActionLink("Request Vacation", "Create", "Vacations")</li>
+                        </ul>
+                    </li>
+
+                    <li class="navigation_item">SICK LEAVE
+                        <ul>
+                            <li id="subdrop">@Html.ActionLink("My Sick Leave Requests", "GetSickLeavesByEmployee", "SickLeaves")</li>
+                            <li id="subdrop">@Html.ActionLink("Request Sick Leave", "Create", "SickLeaves")</li>
+                        </ul>
+                    </li>
+
+                     <li class="navigation_item"> COMPLAINTS
+                        <ul>
+                            <li id="subdrop">@Html.ActionLink("My Complaints", "GetComplaintsByEmployee", "Complaints")</li>
+                            <li id="subdrop">@Html.ActionLink("Write a Complaint", "Create", "Complaints")</li>
+                        </ul>
+                     </li>
+
+                    <li id="single_line">@Html.ActionLink("Resign", "Create", "EmployeeStatus")</li>
 
                 </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">@(((Employee)Session["employee"]).FirstName) @(((Employee)Session["employee"]).LastName)</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Profile<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Profile", "MyProfile", "Employee")</li>
-                            <li>@Html.ActionLink("Put in a two weeks notice", "Create", "EmployeeStatus")</li>
-                            <li class="divider"></li>
-                            <li>@Html.ActionLink("Logout", "logout", "Employee")</li>
-   
-                        </ul>
-                    </li>
-                </ul>
+                <center>
+                    <a href="#">
+                        <h1 class="boxed_item boxed_item_smaller">
+                            <i class="fa fa-user"></i>
+                            SIGN UP
+                        </h1>
+                    </a>
+                </center>
             </div>
-            }
+            <div class="hello"></div>
+    }
 
 
-
-
-            @if (((Employee)Session["employee"]) != null && ((Employee)Session["employee"]).JobTitle == "Human Resources")
-            {
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                   
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Employees <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Employees", "Index", "Manager")</li>
-                                <li>@Html.ActionLink("Complaints", "Index", "Complaints")</li>
-                                <li>@Html.ActionLink("Vacations", "Index", "Vacations")</li>
-                                <li>@Html.ActionLink("Reviews", "Index", "Reviews")</li>
-                                <li>@Html.ActionLink("Sick Leave", "Index", "SickLeaves")</li>
-                                <li>@Html.ActionLink("Termination Requests", "Index", "EmployeeStatus")</li>
-                                <li class="divider"></li>
-                                <li>@Html.ActionLink("Add new employee", "Create", "Manager")</li>
-                                <li>@Html.ActionLink("Fire Employee", "FireEmployee", "EmployeeStatus")</li>
-
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Vacation <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("My Vacation Requests", "GetVacationByEmployee", "Vacations")</li>
-                                <li class="divider"></li>
-                                <li>@Html.ActionLink("Request Vacation", "Create", "Vacations")</li>
-
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sick Leave <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("My Sick Leave Requests", "GetSickLeavesByEmployee", "SickLeaves")</li>
-                                <li class="divider"></li>
-                                <li>@Html.ActionLink("Request Sick Leave", "Create", "SickLeaves")</li>
-
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Complaint<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("My Complaints", "GetComplaintsByEmployee", "Complaints")</li>
-                                <li class="divider"></li>
-                                <li>@Html.ActionLink("Write a Complaint", "Create", "Complaints")</li>
-
-                            </ul>
-                        </li>
-
-
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">@(((Employee)Session["employee"]).FirstName) @(((Employee)Session["employee"]).LastName)</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Profile<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Profile", "MyProfile", "Employee")</li>
-                                <li>@Html.ActionLink("Put in a two weeks notice", "Create", "EmployeeStatus")</li>
-                                <li class="divider"></li>
-                                <li>@Html.ActionLink("Logout", "logout", "Employee")</li>
-
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            }
-            @if (((Employee)Session["employee"]) != null && ((Employee)Session["employee"]).JobTitle == "Employee")
-            {
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Vacation <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("My Vacation Requests", "GetVacationByEmployee", "Vacations")</li>
-                                <li class="divider"></li>
-                                <li>@Html.ActionLink("Request Vacation", "Create", "Vacations")</li>
-
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sick Leave <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("My Sick Leave Requests", "GetSickLeavesByEmployee", "SickLeaves")</li>
-                                <li class="divider"></li>
-                                <li>@Html.ActionLink("Request Sick Leave", "Create", "SickLeaves")</li>
-
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Complaint<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("My Complaints", "GetComplaintsByEmployee", "Complaints")</li>
-                                <li class="divider"></li>
-                                <li>@Html.ActionLink("Write a Complaint", "Create", "Complaints")</li>
-
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">@(((Employee)Session["employee"]).FirstName) @(((Employee)Session["employee"]).LastName)</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Profile<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Profile", "MyProfile", "Employee")</li>
-                                <li>@Html.ActionLink("Put in a two weeks notice", "Create", "EmployeeStatus")</li>
-                                <li class="divider"></li>
-                                <li>@Html.ActionLink("Logout", "logout", "Employee")</li>
-
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            }
-            @if (((Employee)Session["employee"]) == null)
-            {
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Login", "login", "Employee")</li>
-                    </ul>
-                </div>
-            }
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
 
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Management System</p>
-        </footer>
-    </div>
+    
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
+
 </html>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+<link href="~/Content/themes/main-style.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".fa-times").click(function () {
+            $(".sidebar_menu").addClass("hide_menu");
+            $(".toggle_menu").addClass("opacity_one");
+        });
+        $(".toggle_menu").click(function () {
+            $(".sidebar_menu").removeClass("hide_menu");
+            $(".toggle_menu").removeClass("opacity_one");
+        });
+    });
+</script>
+<style>
+
+
+    body {
+         background-image: url('../../smartlogin/images/bg3.jpg');
+         background-size: 100%;
+         background-repeat: no-repeat;
+        width: 100%;
+        
+    }
+    .container {
+        background-image: url('../../Content/Pictures/download.png');
+    }
+    
+</style>
+

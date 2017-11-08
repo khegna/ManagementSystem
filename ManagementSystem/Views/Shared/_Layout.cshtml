@@ -6,7 +6,7 @@
 @using ManagementSystem.Business.Repository;
 @using ManagementSystem.Data;
 @using ManagementSystem.Business.EmployeeRepository;
-@*<!DOCTYPE html>
+@*
     <html>
     <head>
         <meta charset="utf-8" />
@@ -209,43 +209,10 @@
     <title>Slide-Out Navigation Bar</title>
 </head>
 <body>
-    @*
-    <i class="fa fa-bars fa-2x toggle_menu"></i>
-    <div class="sidebar_menu">
-        <i class="fa fa-times"></i>
-        <center>
-            <a href="_Layout.cshtml"><h1 class="boxed_item">Kristin <span class="logo_bold">Hegna</span></h1></a>
-            <h2 class="logo_title">Manager</h2>
-        </center>
-
-        <ul class="navigation_selection">
-            <li class="navigation_item">PROFILE</li>
-            <li class="navigation_item">
-                Employees
-                <ul>
-                            <li><a href="#" id="subdrop">ITEM</a>
-                            <li><a href="#" id="subdrop">ITEM1</a>
-                            <li><a href="#" id="subdrop">ITEM2</a>
-                </ul>
-            </li>
-
-            <li class="navigation_item">EDUCATION</li>
-            <li class="navigation_item">INTERESTS</li>
-            <li class="navigation_item">SKILLS</li>
-        </ul>
-        <center>
-            <a href="#">
-                <h1 class="boxed_item boxed_item_smaller">
-                    <i class="fa fa-user"></i>
-                    SIGN UP
-                </h1>
-            </a>
-        </center>
-    </div>
-    *@
 
 
-    @if (((Employee)Session["employee"]) != null && ((Employee)Session["employee"]).JobTitle == "Manager")
+
+    @if (((Employee)Session["employee"]) != null && ((Employee)Session["employee"]).JobTitle == "Human Resources")
     {
 
         <i class="fa fa-bars fa-2x toggle_menu"></i>
@@ -272,14 +239,10 @@
                             <li id="subdrop">@Html.ActionLink("Complaints", "Index", "Complaints")</li>
                             <li id="subdrop">@Html.ActionLink("Vacations", "Index", "Vacations")</li>
                             <li id="subdrop">@Html.ActionLink("Sick Leave", "Index", "SickLeaves")</li>
-                        </ul>
-                    </li>
-
-                    <li class="navigation_item">
-                        MY EMPLOYEE REVIEWS
-                        <ul>
+                            <li id="subdrop">@Html.ActionLink("Termination Requests", "Index", "EmployeeStatus")</li>
                             <li id="subdrop">@Html.ActionLink("Reviews", "Index", "Reviews")</li>
-                            <li id="subdrop">@Html.ActionLink("Write a Review", "Create", "Reviews")</li>
+                            <li id="subdrop">@Html.ActionLink("Add new employee", "Create", "Manager")</li>
+                            <li id="subdrop">@Html.ActionLink("Fire Employee", "FireEmployee", "EmployeeStatus")</li>
                         </ul>
                     </li>
 
@@ -316,13 +279,156 @@
                     </a>
                 </center>
             </div>
-            <div class="hello"></div>
+           
     }
+
+    @if (((Employee)Session["employee"]) != null && ((Employee)Session["employee"]).JobTitle == "Manager")
+    {
+
+        <i class="fa fa-bars fa-2x toggle_menu"></i>
+        <div class="sidebar_menu">
+            <i class="fa fa-times"></i>
+            <center>
+                <a href="_Layout.cshtml"><h1 class="boxed_item">  @(((Employee)Session["employee"]).FirstName)  <span class="logo_bold">@(((Employee)Session["employee"]).LastName)</span></h1></a>
+                <h2 class="logo_title">@(((Employee)Session["employee"]).JobTitle)</h2>
+            </center>
+
+            <ul class="navigation_selection">
+                <li class="navigation_item">
+                    PROFILE
+                    <ul>
+                        <li id="subdrop">@Html.ActionLink("Profile", "MyProfile", "Employee")</li>
+                        <li id="subdrop">@Html.ActionLink("Logout", "logout", "Employee")</li>
+                    </ul>
+                </li>
+
+                <li class="navigation_item">
+                    EMPLOYEES
+                    <ul>
+
+                        <li id="subdrop">@Html.ActionLink("Employees", "Index", "Manager")</li>
+                        <li id="subdrop">@Html.ActionLink("Complaints", "Index", "Complaints")</li>
+                        <li id="subdrop">@Html.ActionLink("Vacations", "Index", "Vacations")</li>
+                        <li id="subdrop">@Html.ActionLink("Sick Leave", "Index", "SickLeaves")</li>
+
+                    </ul>
+                </li>
+
+                <li class="navigation_item">
+                    MY EMPLOYEE REVIEWS
+                    <ul>
+                        <li id="subdrop">@Html.ActionLink("Reviews", "Index", "Reviews")</li>
+                        <li id="subdrop">@Html.ActionLink("Write a Review", "Create", "Reviews")</li>
+                    </ul>
+                </li>
+
+                <li class="navigation_item">
+                    VACATION
+                    <ul>
+                        <li id="subdrop">@Html.ActionLink("My Vacation Requests", "GetVacationByEmployee", "Vacations")</li>
+                        <li id="subdrop">@Html.ActionLink("Request Vacation", "Create", "Vacations")</li>
+                    </ul>
+                </li>
+
+                <li class="navigation_item">
+                    SICK LEAVE
+                    <ul>
+                        <li id="subdrop">@Html.ActionLink("My Sick Leave Requests", "GetSickLeavesByEmployee", "SickLeaves")</li>
+                        <li id="subdrop">@Html.ActionLink("Request Sick Leave", "Create", "SickLeaves")</li>
+                    </ul>
+                </li>
+
+                <li class="navigation_item">
+                    COMPLAINTS
+                    <ul>
+                        <li id="subdrop">@Html.ActionLink("My Complaints", "GetComplaintsByEmployee", "Complaints")</li>
+                        <li id="subdrop">@Html.ActionLink("Write a Complaint", "Create", "Complaints")</li>
+                    </ul>
+                </li>
+
+                <li id="single_line">@Html.ActionLink("Resign", "Create", "EmployeeStatus")</li>
+
+            </ul>
+            <center>
+                <a href="#">
+                    <h1 class="boxed_item boxed_item_smaller">
+                        <i class="fa fa-user"></i>
+                        SIGN UP
+                    </h1>
+                </a>
+            </center>
+        </div>
+    }
+
+
+
+
+    @if (((Employee)Session["employee"]) != null && ((Employee)Session["employee"]).JobTitle == "Employee")
+    {
+
+        <i class="fa fa-bars fa-2x toggle_menu"></i>
+        <div class="sidebar_menu">
+            <i class="fa fa-times"></i>
+            <center>
+                <a href="_Layout.cshtml"><h1 class="boxed_item">  @(((Employee)Session["employee"]).FirstName)  <span class="logo_bold">@(((Employee)Session["employee"]).LastName)</span></h1></a>
+                <h2 class="logo_title">@(((Employee)Session["employee"]).JobTitle)</h2>
+            </center>
+
+            <ul class="navigation_selection">
+                <li class="navigation_item">
+                    PROFILE
+                    <ul>
+                        <li id="subdrop">@Html.ActionLink("Profile", "MyProfile", "Employee")</li>
+                        <li id="subdrop">@Html.ActionLink("Logout", "logout", "Employee")</li>
+                    </ul>
+                </li>
+
+                <li class="navigation_item">
+                    VACATION
+                    <ul>
+                        <li id="subdrop">@Html.ActionLink("My Vacation Requests", "GetVacationByEmployee", "Vacations")</li>
+                        <li id="subdrop">@Html.ActionLink("Request Vacation", "Create", "Vacations")</li>
+                    </ul>
+                </li>
+
+                <li class="navigation_item">
+                    SICK LEAVE
+                    <ul>
+                        <li id="subdrop">@Html.ActionLink("My Sick Leave Requests", "GetSickLeavesByEmployee", "SickLeaves")</li>
+                        <li id="subdrop">@Html.ActionLink("Request Sick Leave", "Create", "SickLeaves")</li>
+                    </ul>
+                </li>
+
+                <li class="navigation_item">
+                    COMPLAINTS
+                    <ul>
+                        <li id="subdrop">@Html.ActionLink("My Complaints", "GetComplaintsByEmployee", "Complaints")</li>
+                        <li id="subdrop">@Html.ActionLink("Write a Complaint", "Create", "Complaints")</li>
+                    </ul>
+                </li>
+
+                <li id="single_line">@Html.ActionLink("Resign", "Create", "EmployeeStatus")</li>
+
+            </ul>
+            <center>
+                <a href="#">
+                    <h1 class="boxed_item boxed_item_smaller">
+                        <i class="fa fa-user"></i>
+                        SIGN UP
+                    </h1>
+                </a>
+            </center>
+        </div>
+    }
+
 
 
         <div class="container body-content">
             @RenderBody()
             <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Management System</p>
+            </footer>
 
         </div>
     
@@ -346,6 +452,8 @@
         });
     });
 </script>
+@if (((Employee)Session["employee"]) != null)
+{
 <style>
 
 
@@ -357,8 +465,10 @@
         
     }
     .container {
-        background-image: url('../../Content/Pictures/download.png');
+      
+        background-color: rgba(255,255,255,0.69);
     }
     
 </style>
 
+}

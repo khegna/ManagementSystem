@@ -7,13 +7,17 @@
 .toggle_menu{
     position:fixed;
     padding:15px 20px 15px 15px;
-    margin-top: 70px;
+    margin-top: 61px;
     color:white;
     cursor:pointer;
-    background-color: #648879;
+    background-color:rgba(57, 75, 97, 0.83);
     z-index: 10000000;
     font-size: 2em;
     opacity:0;
+}
+.user_icon {
+    padding: 15px 0px 15px 15px;
+    color: white;
 }
 .sidebar_menu {
     position: fixed;
@@ -25,6 +29,7 @@
     opacity: 0.9;
     transition: all 0.3s ease-in-out;
     min-width: 400px;
+    margin-top:61px;
 }
 .fa-times {
     right: 12px;
@@ -38,6 +43,18 @@
 .fa-times:hover {
     opacity:1;
 }
+.user_login {
+    padding: 10px 20px 0px 0px;
+    color: white;
+    float: left;
+    font-size:16px;
+}
+    .user_login :hover{
+        font-size: 19px;
+        cursor: pointer;
+        background-color: black;
+      
+    }
 .boxed_item {
     font-family:"Open Sans";
     font-weight: 200;
@@ -81,7 +98,6 @@
 #single_line{
     font-weight: 200;
     font-family: "Open Sans";
-    color: white;
     padding: 12px 0;
     box-sizing: border-box;
     font-size: 14px;

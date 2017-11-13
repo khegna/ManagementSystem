@@ -19,6 +19,12 @@ namespace ManagementSystem.Controllers
         {
             return View(db.EmployeeStatus.ToList());
         }
+        public ActionResult IndexByManager()
+        {
+            var session = (Employee)Session["employee"];
+            var indexByManager = (db.EmployeeStatus.Where(x => x.Employee.ManagerId == session.EmployeeId).ToList());
+            return View(indexByManager);
+        }
 
         // GET: EmployeeStatus/Details/5
         public ActionResult Details(int? id)

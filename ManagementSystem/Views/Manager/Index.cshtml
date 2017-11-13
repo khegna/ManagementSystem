@@ -131,7 +131,7 @@
                     @Html.DisplayFor(modelItem => item.StartDate)
                 </td>
                 <td>
-                    @if (ViewBag.title == "Human Resources")
+                    @if (ViewBag.JobType == "Human Resources")
                     {
                     <div class="btn-group btn-group-sm">
                         <button type="button" class="btn btn-default"> @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId })</button>

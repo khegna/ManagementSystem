@@ -1,0 +1,53 @@
+﻿@model ManagementSystem.Data.RaiseRequest
+
+    <div>
+        <h4>RaiseRequest</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.DateIssued)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DateIssued)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.RaiseAmount)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.RaiseAmount)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SendTo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SendTo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ApprovalStatus)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ApprovalStatus)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Employee.FirstName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Employee.FirstName)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.RaiseRequestId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+

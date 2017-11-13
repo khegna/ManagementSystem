@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ManagementSystem.Data.EmployeeStatu>
+
+@{
+    ViewBag.Title = "IndexByManager";
+}
+
+
+<h2>Terminated Employees</h2>
+    <table class="table" border="1">
+        <tr>
+            <th>
+                Tremination Date
+            </th>
+            <th>
+                Final Date
+            </th>
+            <th>
+                Name
+            </th>
+            <th>Actions</th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TreminationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinalDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                @Html.DisplayFor(modelItem => item.Employee.LastName)
+            </td>
+            <td>
+                <div class="btn-group btn-group-sm">
+                    <button type="button" class="btn btn-default"> @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeStatusId })</button>
+                    <button type="button" class="btn btn-default">@Html.ActionLink("Details", "Details", new { id = item.EmployeeStatusId })</button>
+                </div>
+            </td>
+        </tr>
+    }
+    
+    </table>
+

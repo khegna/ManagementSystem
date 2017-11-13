@@ -25,7 +25,7 @@ namespace ManagementSystem.Controllers
         public ActionResult Index(string searchBy, string search)
         {
             var session = (Employee)Session["employee"];
-            ViewBag.title = session.JobTitle;
+            ViewBag.JobType = ((Employee)Session["employee"]).JobTitle;
             if (session.JobTitle == "Manager")
             {
                 var employeeByManager = (db.Employees.Where(x => x.ManagerId == session.EmployeeId).ToList());
@@ -105,9 +105,6 @@ namespace ManagementSystem.Controllers
             return View();
         }
 
-        // POST: Manager/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "EmployeeId,FirstName,LastName,Username,EmployeePassword,Email,Salary,VacationDays,JobTitle,ManagerId,Rating,SickDaysTotal,DepartmentId,EmployeeStatusId,StartDate")] Employee employee)

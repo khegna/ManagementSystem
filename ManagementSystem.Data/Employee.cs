@@ -19,6 +19,7 @@ namespace ManagementSystem.Data
         {
             this.Complaints = new HashSet<Complaint>();
             this.EmployeeStatus = new HashSet<EmployeeStatu>();
+            this.RaiseRequests = new HashSet<RaiseRequest>();
             this.Reviews = new HashSet<Review>();
             this.SickLeaves = new HashSet<SickLeave>();
             this.Vacations = new HashSet<Vacation>();
@@ -48,6 +49,8 @@ namespace ManagementSystem.Data
         public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmployeeStatu> EmployeeStatus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RaiseRequest> RaiseRequests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review> Reviews { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

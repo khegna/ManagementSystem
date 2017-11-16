@@ -39,7 +39,9 @@ namespace ManagementSystem.Controllers
         // GET: RaiseRequests/Create
         public ActionResult Create()
         {
-            ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName");
+            var session = (Employee)Session["employee"];
+            var employeesByManager = (db.Employees.Where(x => x.ManagerId == session.EmployeeId).ToList());
+            ViewBag.EmployeeId = new SelectList(employeesByManager, "EmployeeId", "FirstName");
             return View();
         }
 
@@ -52,6 +54,8 @@ namespace ManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                raiseRequest.DateIssued = System.DateTime.Now;
+                raiseRequest.ApprovalStatus = "Pending";
                 db.RaiseRequests.Add(raiseRequest);
                 db.SaveChanges();
                 return RedirectToAction("Index");

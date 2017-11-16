@@ -1,24 +1,19 @@
 ﻿@model IEnumerable<ManagementSystem.Data.RaiseRequest>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+<h2>Raise Requests</h2>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DateIssued)
+               Date Issued
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RaiseAmount)
+                Raise Amount
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SendTo)
+                Approval Status
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ApprovalStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee.FirstName)
+                Name
             </th>
             <th></th>
         </tr>
@@ -32,19 +27,19 @@
                 @Html.DisplayFor(modelItem => item.RaiseAmount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SendTo)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.ApprovalStatus)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                @Html.DisplayFor(modelItem => item.Employee.LastName)
             </td>
+            @*
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.RaiseRequestId }) |
                 @Html.ActionLink("Details", "Details", new { id=item.RaiseRequestId }) |
                 @Html.ActionLink("Delete", "Delete", new { id=item.RaiseRequestId })
             </td>
+                *@
         </tr>
     }
     

@@ -21,7 +21,7 @@ namespace ManagementSystem.Controllers
             ViewBag.sessionID = session;
             if (session.JobTitle == "Manager")
             {
-                var complaintByManager = (db.Complaints.Where(x => x.EmployeeId == session.EmployeeId).ToList());
+                var complaintByManager = (db.Complaints.Where(x => x.Employee.ManagerId == session.EmployeeId).ToList());
                 var complaintsByView = (complaintByManager.Where(x => x.SendTo == "Manager").ToList());
                 return View(complaintsByView);
 

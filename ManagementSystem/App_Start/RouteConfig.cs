@@ -14,9 +14,15 @@ namespace ManagementSystem
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Kristin",
+                url: "Login",
+                defaults: new { controller = "Employee", action = "SmartLogin"}
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Employee", action = "Smartlogin", id = UrlParameter.Optional }
             );
         }
     }

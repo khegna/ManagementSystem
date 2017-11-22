@@ -113,6 +113,19 @@ namespace ManagementSystem.Controllers
         {
             var employeeS = (Employee)Session["employee"];
             ViewBag.employeeTitle = employeeS.JobTitle;
+
+            //---graph current rating---
+            var rating = employeeS.Rating / employeeS.NumberOfReviews;
+            ViewBag.employeeRating = rating;
+
+            //---graph review/progress----
+
+            
+
+
+
+
+
             return View(employee);
         }
         public ActionResult MyProfile() {

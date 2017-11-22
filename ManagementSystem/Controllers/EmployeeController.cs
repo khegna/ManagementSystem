@@ -6,12 +6,14 @@ using System.Web.Mvc;
 using ManagementSystem.Business.Repository;
 using ManagementSystem.Data;
 using ManagementSystem.Business.EmployeeRepository;
+using Newtonsoft.Json;
 
 namespace ManagementSystem.Controllers
 {
     public class EmployeeController : Controller
     {
         private EmployeeRepository _userRepository;
+        private ManagementSystemEntities db = new ManagementSystemEntities();
 
         public EmployeeController()
         {
@@ -120,19 +122,29 @@ namespace ManagementSystem.Controllers
 
             //---graph review/progress----
 
-            
+            var reviewsBySession = (db.Reviews.Where(x => x.EmployeeId == employeeS.EmployeeId).ToList());
+
+            var EmployeeReviews = from x in reviewsBySession
+                                  select new EmployeeReview()
+                                  {
+                                      Date = x.DateIssued.Value.ToString("yyyy/MM/dd"),
+                                      ReviewWeight = x.ReviewWeight
+                                  };
 
 
+            var data = JsonConvert.SerializeObject(EmployeeReviews);
+            ViewBag.DataPoints = data;
 
-
-
-            return View(employee);
+            return View(reviewsBySession);
         }
         public ActionResult MyProfile() {
             var employee = (Employee)Session["employee"];
             return View(employee);
         }
-
-
+        private class EmployeeReview
+        {
+            public string Date { get; set; }
+            public int? ReviewWeight {get; set; }
+        }
     }
 }

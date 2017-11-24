@@ -154,6 +154,7 @@
     <Compile Include="Controllers\EmployeeStatusController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\ProfilePicturesController.cs" />
     <Compile Include="Controllers\RaiseRequestsController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\SickLeavesController.cs" />
@@ -318,6 +319,11 @@
     <Content Include="Views\RaiseRequests\Details.cshtml" />
     <Content Include="Views\RaiseRequests\Edit.cshtml" />
     <Content Include="Views\RaiseRequests\Index.cshtml" />
+    <Content Include="Views\ProfilePictures\Create.cshtml" />
+    <Content Include="Views\ProfilePictures\Delete.cshtml" />
+    <Content Include="Views\ProfilePictures\Details.cshtml" />
+    <Content Include="Views\ProfilePictures\Edit.cshtml" />
+    <Content Include="Views\ProfilePictures\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

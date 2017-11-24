@@ -59,6 +59,14 @@
           <Property Name="FinalDate" Type="date" />
           <Property Name="EmployeeId" Type="int" />
         </EntityType>
+        <EntityType Name="ProfilePicture">
+          <Key>
+            <PropertyRef Name="ProfilePictureId" />
+          </Key>
+          <Property Name="ProfilePictureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Picture" Type="varbinary(max)" />
+          <Property Name="EmployeeId" Type="int" />
+        </EntityType>
         <EntityType Name="RaiseRequest">
           <Key>
             <PropertyRef Name="RaiseRequestId" />
@@ -110,6 +118,18 @@
               <PropertyRef Name="EmployeeId" />
             </Principal>
             <Dependent Role="EmployeeStatus">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProfilePi__Emplo__6FE99F9F">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="ProfilePicture" Type="Self.ProfilePicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="ProfilePicture">
               <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -203,6 +223,7 @@
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeStatus" EntityType="Self.EmployeeStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfilePicture" EntityType="Self.ProfilePicture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RaiseRequest" EntityType="Self.RaiseRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SickLeave" EntityType="Self.SickLeave" Schema="dbo" store:Type="Tables" />
@@ -210,6 +231,10 @@
           <AssociationSet Name="FK__EmployeeS__Emplo__47DBAE45" Association="Self.FK__EmployeeS__Emplo__47DBAE45">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="EmployeeStatus" EntitySet="EmployeeStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProfilePi__Emplo__6FE99F9F" Association="Self.FK__ProfilePi__Emplo__6FE99F9F">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="ProfilePicture" EntitySet="ProfilePicture" />
           </AssociationSet>
           <AssociationSet Name="FkDepartmentId" Association="Self.FkDepartmentId">
             <End Role="Department" EntitySet="Department" />
@@ -249,6 +274,7 @@
           <EntitySet Name="Departments" EntityType="ManagementSystemModel.Department" />
           <EntitySet Name="Employees" EntityType="ManagementSystemModel.Employee" />
           <EntitySet Name="EmployeeStatus" EntityType="ManagementSystemModel.EmployeeStatu" />
+          <EntitySet Name="ProfilePictures" EntityType="ManagementSystemModel.ProfilePicture" />
           <EntitySet Name="RaiseRequests" EntityType="ManagementSystemModel.RaiseRequest" />
           <EntitySet Name="Reviews" EntityType="ManagementSystemModel.Review" />
           <EntitySet Name="SickLeaves" EntityType="ManagementSystemModel.SickLeave" />
@@ -264,6 +290,10 @@
           <AssociationSet Name="FK__EmployeeS__Emplo__47DBAE45" Association="ManagementSystemModel.FK__EmployeeS__Emplo__47DBAE45">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="EmployeeStatu" EntitySet="EmployeeStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProfilePi__Emplo__6FE99F9F" Association="ManagementSystemModel.FK__ProfilePi__Emplo__6FE99F9F">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="ProfilePicture" EntitySet="ProfilePictures" />
           </AssociationSet>
           <AssociationSet Name="FkEmployeeRaiseRequestId" Association="ManagementSystemModel.FkEmployeeRaiseRequestId">
             <End Role="Employee" EntitySet="Employees" />
@@ -335,6 +365,7 @@
           <NavigationProperty Name="Complaints" Relationship="ManagementSystemModel.FkEmployeeComplaintId" FromRole="Employee" ToRole="Complaint" />
           <NavigationProperty Name="Department" Relationship="ManagementSystemModel.FkDepartmentId" FromRole="Employee" ToRole="Department" />
           <NavigationProperty Name="EmployeeStatus" Relationship="ManagementSystemModel.FK__EmployeeS__Emplo__47DBAE45" FromRole="Employee" ToRole="EmployeeStatu" />
+          <NavigationProperty Name="ProfilePictures" Relationship="ManagementSystemModel.FK__ProfilePi__Emplo__6FE99F9F" FromRole="Employee" ToRole="ProfilePicture" />
           <NavigationProperty Name="RaiseRequests" Relationship="ManagementSystemModel.FkEmployeeRaiseRequestId" FromRole="Employee" ToRole="RaiseRequest" />
           <NavigationProperty Name="Reviews" Relationship="ManagementSystemModel.FkEmployeeReviewId" FromRole="Employee" ToRole="Review" />
           <NavigationProperty Name="SickLeaves" Relationship="ManagementSystemModel.FkEmployeeSickLeaveId" FromRole="Employee" ToRole="SickLeave" />
@@ -351,6 +382,15 @@
           <Property Name="EmployeeId" Type="Int32" />
           <NavigationProperty Name="Employee" Relationship="ManagementSystemModel.FK__EmployeeS__Emplo__47DBAE45" FromRole="EmployeeStatu" ToRole="Employee" />
           <NavigationProperty Name="Employees" Relationship="ManagementSystemModel.FkEmployeeStatusId" FromRole="EmployeeStatu" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="ProfilePicture">
+          <Key>
+            <PropertyRef Name="ProfilePictureId" />
+          </Key>
+          <Property Name="ProfilePictureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="ManagementSystemModel.FK__ProfilePi__Emplo__6FE99F9F" FromRole="ProfilePicture" ToRole="Employee" />
         </EntityType>
         <EntityType Name="RaiseRequest">
           <Key>
@@ -431,6 +471,18 @@
               <PropertyRef Name="EmployeeId" />
             </Principal>
             <Dependent Role="EmployeeStatu">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProfilePi__Emplo__6FE99F9F">
+          <End Type="ManagementSystemModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ManagementSystemModel.ProfilePicture" Role="ProfilePicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="ProfilePicture">
               <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -556,6 +608,15 @@
                 <ScalarProperty Name="FinalDate" ColumnName="FinalDate" />
                 <ScalarProperty Name="TreminationDate" ColumnName="TreminationDate" />
                 <ScalarProperty Name="EmployeeStatusId" ColumnName="EmployeeStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfilePictures">
+            <EntityTypeMapping TypeName="ManagementSystemModel.ProfilePicture">
+              <MappingFragment StoreEntitySet="ProfilePicture">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="ProfilePictureId" ColumnName="ProfilePictureId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

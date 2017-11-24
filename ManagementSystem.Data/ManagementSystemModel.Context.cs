@@ -29,6 +29,7 @@ namespace ManagementSystem.Data
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeeStatu> EmployeeStatus { get; set; }
+        public virtual DbSet<ProfilePicture> ProfilePictures { get; set; }
         public virtual DbSet<RaiseRequest> RaiseRequests { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<SickLeave> SickLeaves { get; set; }

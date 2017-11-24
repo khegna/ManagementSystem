@@ -58,14 +58,15 @@
 .boxed_item {
     font-family:"Open Sans";
     font-weight: 200;
-    padding:2px 20px;
+    padding:15px 30px;
     display: inline-block;
     border:solid 2px white;
     box-sizing:border-box;
     font-size: 40px;
     color:white;
     text-align: center;
-    margin-top: 70px;
+    margin-top: 35px;
+    margin-bottom:0px;
 }
 .logo_bold {
     font-weight:800;

@@ -91,6 +91,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ManagementSystemModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ProfilePicture.cs">
+      <DependentUpon>ManagementSystemModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RaiseRequest.cs">
       <DependentUpon>ManagementSystemModel.tt</DependentUpon>

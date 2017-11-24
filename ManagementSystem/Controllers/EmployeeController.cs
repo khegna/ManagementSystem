@@ -52,6 +52,15 @@ namespace ManagementSystem.Controllers
                 var employeeS = (Employee)Session["employee"];
                 ViewBag.employeeTitle = employeeS.JobTitle;
 
+                var profilePicture = (db.ProfilePictures.Where(x => x.EmployeeId == employeeS.EmployeeId).FirstOrDefault());
+                if (profilePicture != null)
+                {
+                    Session["picture"] = profilePicture.Picture;
+                }
+                else {
+                    Session["picture"] = null;
+                }
+
                 return RedirectToAction("WelcomePage", "Employee", new { username = employeeLoggedIn?.Username });
             }
             else

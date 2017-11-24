@@ -215,9 +215,24 @@
     @if (((Employee)Session["employee"]) != null && ((Employee)Session["employee"]).JobTitle == "Human Resources")
     {
 
+
+
         <i class="fa fa-bars fa-2x toggle_menu"></i>
             <div class="sidebar_menu">
                 <i class="fa fa-times"></i>
+@if ((Byte[])(Session["picture"]) != null)
+{
+
+
+    var base64 = Convert.ToBase64String((Byte[])(Session["picture"]));
+    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                <center style="padding-top: 30px;">
+                    <a href="@imgsrc">
+                        <img src="@imgsrc" class="img img-responsive img-thumbnail" style=" height: 200px; width: 200px; border-radius: 50%;">
+                    </a>
+                </center>
+}
                 <center>
                     <a href="_Layout.cshtml"><h1 class="boxed_item">  @(((Employee)Session["employee"]).FirstName)  <span class="logo_bold">@(((Employee)Session["employee"]).LastName)</span></h1></a>
                     <h2 class="logo_title">@(((Employee)Session["employee"]).JobTitle)</h2>
@@ -268,7 +283,7 @@
                             <li id="subdrop">@Html.ActionLink("Write a Complaint", "Create", "Complaints")</li>
                         </ul>
                      </li>
-
+                    <li id="single_line">@Html.ActionLink("Upload a profile picture", "Create", "ProfilePictures")</li>
                     <li id="single_line">@Html.ActionLink("Resign", "Create", "EmployeeStatus")</li>
 
                 </ul>
@@ -283,7 +298,20 @@
         <i class="fa fa-bars fa-2x toggle_menu"></i>
         <div class="sidebar_menu">
             <i class="fa fa-times"></i>
+@if ((Byte[])(Session["picture"]) != null)
+{
+
+    var base64 = Convert.ToBase64String((Byte[])(Session["picture"]));
+    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+            <center style="padding-top: 30px;">
+                <a href="@imgsrc">
+                <img src="@imgsrc" class="img img-responsive img-thumbnail" style=" height: 200px; width: 200px; border-radius: 50%;">
+                </a>
+            </center>
+}
             <center>
+
                 <a href="_Layout.cshtml"><h1 class="boxed_item">  @(((Employee)Session["employee"]).FirstName)  <span class="logo_bold">@(((Employee)Session["employee"]).LastName)</span></h1></a>
                 <h2 class="logo_title">@(((Employee)Session["employee"]).JobTitle)</h2>
             </center>
@@ -351,7 +379,7 @@
                 </li>
 
                 <li id="single_line">@Html.ActionLink("Resign", "Create", "EmployeeStatus")</li>
-
+                <li id="single_line">@Html.ActionLink("Upload a profile picture", "Create", "ProfilePictures")</li>
             </ul>
 
         </div>
@@ -366,6 +394,18 @@
         <i class="fa fa-bars fa-2x toggle_menu"></i>
         <div class="sidebar_menu">
             <i class="fa fa-times"></i>
+            @if ((Byte[])(Session["picture"]) != null)
+            {
+          
+                var base64 = Convert.ToBase64String((Byte[])(Session["picture"]));
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+            
+            <center style="padding-top: 30px;">
+                <a href="@imgsrc">
+                    <img src="@imgsrc" class="img img-responsive img-thumbnail" style=" height: 200px; width: 200px; border-radius: 50%;">
+                </a>
+            </center>
+                }
             <center>
                 <a href="_Layout.cshtml"><h1 class="boxed_item">  @(((Employee)Session["employee"]).FirstName)  <span class="logo_bold">@(((Employee)Session["employee"]).LastName)</span></h1></a>
                 <h2 class="logo_title">@(((Employee)Session["employee"]).JobTitle)</h2>
@@ -403,7 +443,7 @@
                         <li id="subdrop">@Html.ActionLink("Write a Complaint", "Create", "Complaints")</li>
                     </ul>
                 </li>
-
+                <li id="single_line">@Html.ActionLink("Upload a profile picture", "Create", "ProfilePictures")</li>
                 <li id="single_line">@Html.ActionLink("Resign", "Create", "EmployeeStatus")</li>
 
             </ul>
@@ -462,7 +502,7 @@
     }
     .container {
       
-        background-color: rgba(255,255,255,0.69);
+        background-color: rgba(255,255,255,0.10);
     }
     
 </style>

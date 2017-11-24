@@ -120,9 +120,9 @@ input,
 optgroup,
 select,
 textarea {
-  color: inherit;
-  font: inherit;
-  margin: 0;
+    color: black;
+    font-family: "Open Sans";
+    margin: 0;
 }
 button {
   overflow: visible;
@@ -1088,16 +1088,16 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #555555;
+  color: white;
   background-color: #ffffff;
 }
 input,
 button,
 select,
 textarea {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
+    font-family: "Open Sans";
+    font-size: inherit;
+    line-height: inherit;
 }
 a {
   color: #2fa4e7;
@@ -1186,10 +1186,11 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 500;
-  line-height: 1.2;
-  color: #317eac;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    line-height: 1.2;
+    color: white;
+    text-align: center;
 }
 h1 small,
 h2 small,

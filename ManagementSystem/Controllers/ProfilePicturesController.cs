@@ -56,12 +56,16 @@ namespace ManagementSystem.Controllers
                 profilePicture.EmployeeId = user.EmployeeId;
                 profilePicture.Picture = new byte[image1.ContentLength];
                 image1.InputStream.Read(profilePicture.Picture, 0, image1.ContentLength);
+                Session["picture"] = profilePicture.Picture;
 
             }
             else {
                 return View();
             }
             db.ProfilePictures.Add(profilePicture);
+
+
+
             db.SaveChanges();
             ViewBag.EmployeeId = new SelectList(db.Employees, "EmployeeId", "FirstName", profilePicture.EmployeeId);
             ViewBag.success = "Your profile picture has been uploaded";

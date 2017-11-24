@@ -241,6 +241,7 @@
                             <li id="subdrop">@Html.ActionLink("Sick Leave", "Index", "SickLeaves")</li>
                             <li id="subdrop">@Html.ActionLink("Termination Requests", "Index", "EmployeeStatus")</li>
                             <li id="subdrop">@Html.ActionLink("Reviews", "Index", "Reviews")</li>
+                            <li id="subdrop">@Html.ActionLink("Raise Requests", "Index", "RaiseRequests")</li>
                             <li id="subdrop">@Html.ActionLink("Resignations", "Index", "EmployeeStatus")</li>
                             <li id="subdrop">@Html.ActionLink("Add new employee", "Create", "Manager")</li>
                             <li id="subdrop">@Html.ActionLink("Fire Employee", "FireEmployee", "EmployeeStatus")</li>
@@ -271,14 +272,7 @@
                     <li id="single_line">@Html.ActionLink("Resign", "Create", "EmployeeStatus")</li>
 
                 </ul>
-                <center>
-                    <a href="#">
-                        <h1 class="boxed_item boxed_item_smaller">
-                            <i class="fa fa-user"></i>
-                            SIGN UP
-                        </h1>
-                    </a>
-                </center>
+
             </div>
            
     }
@@ -359,14 +353,7 @@
                 <li id="single_line">@Html.ActionLink("Resign", "Create", "EmployeeStatus")</li>
 
             </ul>
-            <center>
-                <a href="#">
-                    <h1 class="boxed_item boxed_item_smaller">
-                        <i class="fa fa-user"></i>
-                        SIGN UP
-                    </h1>
-                </a>
-            </center>
+
         </div>
     }
 
@@ -420,14 +407,7 @@
                 <li id="single_line">@Html.ActionLink("Resign", "Create", "EmployeeStatus")</li>
 
             </ul>
-            <center>
-                <a href="#">
-                    <h1 class="boxed_item boxed_item_smaller">
-                        <i class="fa fa-user"></i>
-                        SIGN UP
-                    </h1>
-                </a>
-            </center>
+
         </div>
     }
 @if (((Employee)Session["employee"]) != null)

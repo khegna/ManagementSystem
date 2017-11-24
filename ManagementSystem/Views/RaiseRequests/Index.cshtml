@@ -17,11 +17,12 @@
             </th>
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
+
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DateIssued)
+                @item.DateIssued.Value.ToShortDateString()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RaiseAmount)
@@ -33,15 +34,18 @@
                 @Html.DisplayFor(modelItem => item.Employee.FirstName)
                 @Html.DisplayFor(modelItem => item.Employee.LastName)
             </td>
-            @*
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.RaiseRequestId }) |
-                @Html.ActionLink("Details", "Details", new { id=item.RaiseRequestId }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.RaiseRequestId })
-            </td>
-                *@
+             
+        @if (ViewBag.SessionTitle == "Human Resources" && item.ApprovalStatus!= "Approved" && item.ApprovalStatus!= "Denied")
+        {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RaiseRequestId }) 
+                </td>
+        }
+
         </tr>
     }
     
+
+
     </table>
 

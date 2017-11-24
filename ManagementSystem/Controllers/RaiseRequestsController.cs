@@ -18,6 +18,7 @@ namespace ManagementSystem.Controllers
         public ActionResult Index()
         {
             var raiseRequests = db.RaiseRequests.Include(r => r.Employee);
+            ViewBag.SessionTitle = ((Employee)Session["employee"]).JobTitle;
             return View(raiseRequests.ToList());
         }
 
@@ -90,6 +91,11 @@ namespace ManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (raiseRequest.ApprovalStatus == "Approved") {
+                    var employee = (db.Employees.Where(x => x.EmployeeId == raiseRequest.EmployeeId).FirstOrDefault());
+                    employee.Salary = employee.Salary + raiseRequest.RaiseAmount;
+                    db.Entry(employee).State = EntityState.Modified;
+                }
                 db.Entry(raiseRequest).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

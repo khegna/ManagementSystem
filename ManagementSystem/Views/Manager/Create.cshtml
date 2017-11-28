@@ -95,7 +95,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SickDaysTotal, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SickDaysTotal, "Sick Days Total", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SickDaysTotal, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SickDaysTotal, "", new { @class = "text-danger" })
@@ -103,7 +103,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DepartmentId, "DepartmentId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DepartmentId, "Department Id", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })

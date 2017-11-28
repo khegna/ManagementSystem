@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ManagementSystem.Data;
+using System.Net.Mail;
 
 namespace ManagementSystem.Controllers
 {
@@ -19,7 +20,10 @@ namespace ManagementSystem.Controllers
         {
 
             var session = (Employee)Session["employee"];
-            ViewBag.SessionTitle = session.JobTitle;
+            if (session != null)
+            {
+                ViewBag.SessionTitle = session.JobTitle;
+            }
             if (session.JobTitle == "Manager")
             {
                 var sickLeaveByManager = (db.SickLeaves.Where(x => x.Employee.ManagerId == session.EmployeeId).ToList());
@@ -111,6 +115,11 @@ namespace ManagementSystem.Controllers
             if (ModelState.IsValid)
             {
                 sickLeave.EmployeeId = ((Employee)Session["employee"]).EmployeeId;
+                var employeeFilingSL = (Employee)Session["employee"];
+                var employeesManager = ((Employee)Session["employee"]).ManagerId;
+                var managerOfEmployee = db.Employees.Where(x => x.EmployeeId == employeesManager).FirstOrDefault();
+                var managerEmail = managerOfEmployee.Email;
+                SendEmail(managerEmail, employeeFilingSL);
                 sickLeave.ApprovalStatus = "Request Pending";
                 db.SickLeaves.Add(sickLeave);
                 db.SaveChanges();
@@ -199,6 +208,35 @@ namespace ManagementSystem.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [NonAction]
+        public void SendEmail(string email, Employee employee)
+        {
+            var fromEmail = new MailAddress("kriheg1234@gmail.com", "Management System");
+            var toEmail = new MailAddress(email);
+            var fromEmailPassword = "Hegkri89";
+            string subject = "A new Sick Leave Request was createrd";
+            string body = "<br/><br/>" + employee.FirstName + " " + employee.LastName+ " "+"created a new sick leave request." + "<br/><br/>"+
+                "Please login to you Management System account for further information";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+                smtp.Send(message);
+
         }
     }
 }

@@ -8,46 +8,49 @@
 <br>
 
 
-<table class="table-condensed">
-    <tr>
-        <th>
-            Date Issued
-        </th>
-        <th>
-            Description
-        </th>
-        <th>
-            Review Weight
-        </th>
-        <th>
-            Name
-        </th>
-        <th>
-            Actions
-        </th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @item.DateIssued.Value.ToShortDateString()
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReviewDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReviewWeight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employee.FirstName)
-            @Html.DisplayFor(modelItem => item.Employee.LastName)
-        </td>
-        <td>
-            <div class="btn-group btn-group-sm">
-                <button type="button" class="btn btn-default" > @Html.ActionLink("Edit", "Edit", new { id = item.ReviewId }) </button>
-                <button type="button" class="btn btn-default">@Html.ActionLink("Details", "Details", new { id = item.ReviewId })</button>
-            </div>
+<table class="display msTable">
+    <thead>
+        <tr>
+            <th>
+                Date Issued
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Review Weight
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Actions
+            </th>
         </tr>
-}
-
+        </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.DateIssued.Value.ToShortDateString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReviewDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReviewWeight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                    @Html.DisplayFor(modelItem => item.Employee.LastName)
+                </td>
+                <td>
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-default"> @Html.ActionLink("Edit", "Edit", new { id = item.ReviewId }) </button>
+                        <button type="button" class="btn btn-default">@Html.ActionLink("Details", "Details", new { id = item.ReviewId })</button>
+                    </div>
+            </tr>
+        }
+        </tbody>
 </table>

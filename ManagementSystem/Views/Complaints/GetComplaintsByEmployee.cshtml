@@ -7,44 +7,47 @@
 <h3>My Complaints</h3>
 
 
-<table class="table-condensed">
-    <tr>
-        <th>
-            Complaint Description
-        </th>
-        <th>
-            Date Filed
-        </th>
+<table class="display msTable">
+    <thead>
+        <tr>
+            <th>
+                Complaint Description
+            </th>
+            <th>
+                Date Filed
+            </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.Resolved)
-        </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resolved)
+            </th>
 
-        <th>
-            Name
-        </th>
-  
-    </tr>
+            <th>
+                Name
+            </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ComplaintDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateFiled)
-        </td>
+        </tr>
+        </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ComplaintDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateFiled)
+                </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Resolved)
-        </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resolved)
+                </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Employee.FirstName)
-            @Html.DisplayFor(modelItem => item.Employee.LastName)
-        </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                    @Html.DisplayFor(modelItem => item.Employee.LastName)
+                </td>
 
-    </tr>
-}
-
+            </tr>
+        }
+    </tbody>
 </table>

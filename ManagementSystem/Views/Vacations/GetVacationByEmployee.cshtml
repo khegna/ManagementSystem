@@ -7,7 +7,8 @@
 <h2>My Vacation Requests</h2>
 
 
-<table class="table-condensed">
+<table class="display msTable">
+    <thead>
     <tr>
         <th>
             Start Date
@@ -25,7 +26,8 @@
             Actions
         </th>
     </tr>
-
+    </thead>
+    <tbody>
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -48,5 +50,5 @@
         </td>
     </tr>
 }
-
+</tbody>
 </table>

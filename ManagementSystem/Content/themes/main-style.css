@@ -158,3 +158,10 @@
 #subdrop:hover a {
     color:white;
 }
+
+tbody{
+    color:black;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    color:white;
+}

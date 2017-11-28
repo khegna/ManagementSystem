@@ -5,146 +5,137 @@
 }
 <div style="font-family:Arial">
     <h2>My Employees</h2>
-    <br>
-    <p>
-        @using (Html.BeginForm("Index", "Manager", FormMethod.Get))
-        {
-            <b>Seach By</b> @Html.RadioButton("searchBy", "Name", true) <text>Lastname</text>
-            @Html.RadioButton("searchBy", "Username") <text>Username</text>
-            @Html.RadioButton("searchBy", "Sickdays") <text>Sickdays</text>
-            @Html.RadioButton("searchBy", "DepartmentId") <text>DepartmentId</text>
-            @Html.RadioButton("searchBy", "JobTitle") <text>Job Title</text><br />
-            @Html.TextBox("search")<input type="submit" value="Search" />
-        }
-    </p>
-    <table class="table-condensed">
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Salary
-            </th>
-            <th>
-                Vacation Days
-            </th>
-            <th>
-                Job Title
-            </th>
-            <th>
-                Standing
-            </th>
-            <th>
-                Sick Days Total
-            </th>
-            <th>
-                Department Name
-            </th>
-            <th>
-                Current Status
-            </th>
-            <th>
-                Start Date
-            </th>
-            <th>Actions</th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+    <table class="display msTable">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Salary)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VacationDays)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.JobTitle)
-                </td>
-                <td>
-
-
-
-                    @if (item.Standing < 50)
-                    {
-                        <div class="cir"> @Html.DisplayFor(modelItem => item.Standing) </div>
-                        <style>
-                            .cir {
-                                background-color: red;
-                                width: 40px;
-                                height: 40px;
-                                border-radius: 40px;
-                                text-align: center;
-                                padding: 10px;
-                                color: white;
-                                background: red;
-                            }
-                        </style>
-                    }
-                    @if (item.Standing >= 50 && item.Standing < 85)
-                    {
-                        <div class="cir1"> @Html.DisplayFor(modelItem => item.Standing) </div>
-                        <style>
-                            .cir1 {
-                                background-color: red;
-                                width: 40px;
-                                height: 40px;
-                                border-radius: 40px;
-                                text-align: center;
-                                padding: 10px;
-                                color: white;
-                                background: orange;
-                            }
-                        </style>
-                    }
-                    @if (item.Standing >= 85)
-                    {
-                        <div class="cir2"> @Html.DisplayFor(modelItem => item.Standing) </div>
-                        <style>
-                            .cir2 {
-                                background-color: red;
-                                width: 40px;
-                                height: 40px;
-                                border-radius: 40px;
-                                text-align: center;
-                                padding: 10px;
-                                color: white;
-                                background: green;
-                            }
-                        </style>
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SickDaysTotal)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Department.DepartmentName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CurrentStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @if (ViewBag.JobType == "Human Resources")
-                    {
-                    <div class="btn-group btn-group-sm">
-                        <button type="button" class="btn btn-default"> @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId })</button>
-
-                    </div>
-                    }
-                    <div class="btn-group btn-group-sm">
-                        <button type="button" class="btn btn-default"> @Html.ActionLink("Details", "Details", new { id = item.EmployeeId }) </button>
-                    </div>
-                   
-                </td>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Salary
+                </th>
+                <th>
+                    Vacation Days
+                </th>
+                <th>
+                    Job Title
+                </th>
+                <th>
+                    Standing
+                </th>
+                <th>
+                    Sick Days Total
+                </th>
+                <th>
+                    Department Name
+                </th>
+                <th>
+                    Current Status
+                </th>
+                <th>
+                    Start Date
+                </th>
+                <th>Actions</th>
             </tr>
-        }
+        </thead>
+        <tbody>
 
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Salary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VacationDays)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobTitle)
+                    </td>
+                    <td>
+
+
+
+                        @if (item.Standing < 50)
+                        {
+                            <div class="cir"> @Html.DisplayFor(modelItem => item.Standing) </div>
+                            <style>
+                                .cir {
+                                    background-color: red;
+                                    width: 40px;
+                                    height: 40px;
+                                    border-radius: 40px;
+                                    text-align: center;
+                                    padding: 10px;
+                                    color: white;
+                                    background: red;
+                                }
+                            </style>
+                        }
+                        @if (item.Standing >= 50 && item.Standing < 85)
+                        {
+                            <div class="cir1"> @Html.DisplayFor(modelItem => item.Standing) </div>
+                            <style>
+                                .cir1 {
+                                    background-color: red;
+                                    width: 40px;
+                                    height: 40px;
+                                    border-radius: 40px;
+                                    text-align: center;
+                                    padding: 10px;
+                                    color: white;
+                                    background: orange;
+                                }
+                            </style>
+                        }
+                        @if (item.Standing >= 85)
+                        {
+                            <div class="cir2"> @Html.DisplayFor(modelItem => item.Standing) </div>
+                            <style>
+                                .cir2 {
+                                    background-color: red;
+                                    width: 40px;
+                                    height: 40px;
+                                    border-radius: 40px;
+                                    text-align: center;
+                                    padding: 10px;
+                                    color: white;
+                                    background: green;
+                                }
+                            </style>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SickDaysTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CurrentStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @if (ViewBag.JobType == "Human Resources")
+                        {
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-default"> @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId })</button>
+
+                            </div>
+                        }
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-default"> @Html.ActionLink("Details", "Details", new { id = item.EmployeeId }) </button>
+                        </div>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>

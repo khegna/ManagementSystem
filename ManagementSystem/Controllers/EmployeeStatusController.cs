@@ -86,7 +86,7 @@ namespace ManagementSystem.Controllers
                 db.Entry(employeeStatu).State = EntityState.Modified;
                 db.EmployeeStatus.Add(employeeStatu);
                 db.SaveChanges();
-                return RedirectToAction("Resignation");
+                return RedirectToAction("Index");
             }
 
             return View(employeeStatu);

@@ -39,7 +39,7 @@ namespace ManagementSystem.Data
         public Nullable<int> Rating { get; set; }
         public Nullable<int> SickDaysTotal { get; set; }
         public int DepartmentId { get; set; }
-        public int EmployeeStatusId { get; set; }
+        public Nullable<int> EmployeeStatusId { get; set; }
         public Nullable<int> NumberOfReviews { get; set; }
         public Nullable<int> Standing { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }

@@ -1,51 +1,53 @@
 ﻿@model IEnumerable<ManagementSystem.Data.RaiseRequest>
 
 <h2>Raise Requests</h2>
-    <table class="table-condensed">
-        <tr>
-            <th>
-               Date Issued
-            </th>
-            <th>
-                Raise Amount
-            </th>
-            <th>
-                Approval Status
-            </th>
-            <th>
-                Name
-            </th>
-            <th></th>
-        </tr>
+    <table class="display msTable">
+        <thead>
+            <tr>
+                <th>
+                    Date Issued
+                </th>
+                <th>
+                    Raise Amount
+                </th>
+                <th>
+                    Approval Status
+                </th>
+                <th>
+                    Name
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.DateIssued.Value.ToShortDateString()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RaiseAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApprovalStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                        @Html.DisplayFor(modelItem => item.Employee.LastName)
+                    </td>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @item.DateIssued.Value.ToShortDateString()
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RaiseAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApprovalStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Employee.FirstName)
-                @Html.DisplayFor(modelItem => item.Employee.LastName)
-            </td>
-             
-        @if (ViewBag.SessionTitle == "Human Resources" && item.ApprovalStatus!= "Approved" && item.ApprovalStatus!= "Denied")
-        {
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.RaiseRequestId }) 
-                </td>
-        }
+                    @if (ViewBag.SessionTitle == "Human Resources" && item.ApprovalStatus != "Approved" && item.ApprovalStatus != "Denied")
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.RaiseRequestId })
+                        </td>
+                    }
 
-        </tr>
-    }
-    
+                </tr>
+            }
+            </tbody>
 
 
-    </table>
+</table>
 

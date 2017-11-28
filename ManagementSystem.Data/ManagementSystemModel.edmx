@@ -44,7 +44,7 @@
           <Property Name="Rating" Type="int" />
           <Property Name="SickDaysTotal" Type="int" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
-          <Property Name="EmployeeStatusId" Type="int" Nullable="false" />
+          <Property Name="EmployeeStatusId" Type="int" />
           <Property Name="NumberOfReviews" Type="int" />
           <Property Name="Standing" Type="int" />
           <Property Name="StartDate" Type="date" />
@@ -195,7 +195,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FkEmployeeStatusId">
-          <End Role="EmployeeStatus" Type="Self.EmployeeStatus" Multiplicity="1" />
+          <End Role="EmployeeStatus" Type="Self.EmployeeStatus" Multiplicity="0..1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EmployeeStatus">
@@ -357,7 +357,7 @@
           <Property Name="Rating" Type="Int32" />
           <Property Name="SickDaysTotal" Type="Int32" />
           <Property Name="DepartmentId" Type="Int32" Nullable="false" />
-          <Property Name="EmployeeStatusId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeStatusId" Type="Int32" />
           <Property Name="NumberOfReviews" Type="Int32" />
           <Property Name="Standing" Type="Int32" />
           <Property Name="StartDate" Type="DateTime" Precision="0" />
@@ -524,7 +524,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FkEmployeeStatusId">
-          <End Type="ManagementSystemModel.EmployeeStatu" Role="EmployeeStatu" Multiplicity="1" />
+          <End Type="ManagementSystemModel.EmployeeStatu" Role="EmployeeStatu" Multiplicity="0..1" />
           <End Type="ManagementSystemModel.Employee" Role="Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="EmployeeStatu">

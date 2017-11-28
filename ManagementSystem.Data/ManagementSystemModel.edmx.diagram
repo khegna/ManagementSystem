@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="97ca0b27d7974bca9be571cf8f9a5a27" Name="Diagram1" ZoomLevel="106">
-        <EntityTypeShape EntityType="ManagementSystemModel.Complaint" Width="1.5" PointX="5.25" PointY="7.875" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Complaint" Width="1.5" PointX="5.25" PointY="8.125" />
         <EntityTypeShape EntityType="ManagementSystemModel.Department" Width="1.5" PointX="0.75" PointY="11.5" />
         <EntityTypeShape EntityType="ManagementSystemModel.Employee" Width="1.5" PointX="3" PointY="9.25" />
         <EntityTypeShape EntityType="ManagementSystemModel.EmployeeStatu" Width="1.5" PointX="5.25" PointY="17.5" />
-        <EntityTypeShape EntityType="ManagementSystemModel.ProfilePicture" Width="1.5" PointX="5.25" PointY="14.875" />
+        <EntityTypeShape EntityType="ManagementSystemModel.ProfilePicture" Width="1.5" PointX="5.25" PointY="12" />
         <EntityTypeShape EntityType="ManagementSystemModel.RaiseRequest" Width="1.5" PointX="5.25" PointY="20.375" />
-        <EntityTypeShape EntityType="ManagementSystemModel.Review" Width="1.5" PointX="5.25" PointY="1.875" />
-        <EntityTypeShape EntityType="ManagementSystemModel.SickLeave" Width="1.5" PointX="5.25" PointY="4.75" />
-        <EntityTypeShape EntityType="ManagementSystemModel.Vacation" Width="1.5" PointX="5.25" PointY="11.75" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Review" Width="1.5" PointX="5.25" PointY="14.5" />
+        <EntityTypeShape EntityType="ManagementSystemModel.SickLeave" Width="1.5" PointX="5.25" PointY="5" />
+        <EntityTypeShape EntityType="ManagementSystemModel.Vacation" Width="1.5" PointX="5.25" PointY="1.875" />
         <AssociationConnector Association="ManagementSystemModel.FkEmployeeComplaintId" />
         <AssociationConnector Association="ManagementSystemModel.FkDepartmentId" />
         <AssociationConnector Association="ManagementSystemModel.FK__EmployeeS__Emplo__47DBAE45" />

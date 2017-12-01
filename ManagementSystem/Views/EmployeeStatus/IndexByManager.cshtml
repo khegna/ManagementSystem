@@ -6,7 +6,8 @@
 
 
 <h2>Terminated Employees</h2>
-    <table class="table-condensed">
+    <table class="display msTable">
+        <thead>
         <tr>
             <th>
                 Tremination Date
@@ -19,7 +20,8 @@
             </th>
             <th>Actions</th>
         </tr>
-    
+    </thead>
+        <tbody>
     @foreach (var item in Model) {
         <tr>
             <td>
@@ -40,6 +42,6 @@
             </td>
         </tr>
     }
-    
+    </tbody>
     </table>
 

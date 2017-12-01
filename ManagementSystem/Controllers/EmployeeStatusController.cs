@@ -162,8 +162,11 @@ namespace ManagementSystem.Controllers
             var session = (Employee)Session["employee"];
             ViewBag.FirstName = session.FirstName;
             ViewBag.LastName = session.LastName;
-            ViewBag.LastDay = DateTime.Today.AddDays(14);
+            var lastDay = DateTime.Today.AddDays(14);
+            ViewBag.LastDay = lastDay.ToShortDateString();
             return View();
+
+            
         }
     }
 }

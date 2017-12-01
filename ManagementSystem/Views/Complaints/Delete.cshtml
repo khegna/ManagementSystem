@@ -4,14 +4,13 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Complaint details</h2>
+<h2>Are you sure you want to sent this complaint to the employee manager?</h2>
 
 <div>
-    <h4>Complaint</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ComplaintDescription)
+              Complaint Description
         </dt>
 
         <dd>
@@ -19,7 +18,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateFiled)
+            Date Filed
         </dt>
 
         <dd>
@@ -27,15 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SeverityLevel)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SeverityLevel)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Resolved)
+            Resolved
         </dt>
 
         <dd>
@@ -43,11 +34,12 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Employee.FirstName)
+            Name
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Employee.FirstName)
+            @Html.DisplayFor(model => model.Employee.LastName)
         </dd>
 
     </dl>
